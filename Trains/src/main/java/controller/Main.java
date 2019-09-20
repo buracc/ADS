@@ -52,6 +52,7 @@ public class Main {
 
         System.out.println("------------------");
 
+        passenger.getWagonOnPosition(10);
 
     }
 }

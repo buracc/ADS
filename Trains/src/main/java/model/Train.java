@@ -83,16 +83,15 @@ public class Train implements Iterable<Wagon> {
     }
 
     public Wagon wagonOnPosRecursive(Wagon wagon, int position, int counter) throws IndexOutOfBoundsException {
-        try {
             if (counter == position) {
                 return wagon;
             }
 
+            if (!wagon.hasNextWagon()) {
+                throw new IndexOutOfBoundsException("Position does not exist on train.");
+            }
+
             return wagonOnPosRecursive(wagon.getNextWagon(), position, ++counter);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Something failed...");
-            return null;
-        }
     }
 
     public int getNumberOfSeats() {
