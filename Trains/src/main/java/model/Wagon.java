@@ -10,8 +10,6 @@ public abstract class Wagon {
     }
 
     public Wagon getLastWagonAttached() {
-        // find the last wagon of the row of wagons attached to this wagon
-        // if no wagons are attached return this wagon
         Wagon w = this;
         if (!w.hasNextWagon()) {
             return w;
@@ -21,7 +19,6 @@ public abstract class Wagon {
     }
 
     public void setNextWagon(Wagon nextWagon) {
-        // when setting the next wagon, set this wagon to be previous wagon of next wagon
         if (nextWagon == null) {
             this.nextWagon = null;
         } else {

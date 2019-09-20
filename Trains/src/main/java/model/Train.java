@@ -8,7 +8,6 @@ public class Train implements Iterable<Wagon> {
     private String destination;
     private String origin;
     private int numberOfWagons;
-    private TrainIterator iterator;
 
 
     public Train(Locomotive engine, String origin, String destination) {
@@ -26,9 +25,6 @@ public class Train implements Iterable<Wagon> {
     }
 
     public void resetNumberOfWagons() {
-       /*  when wagons are hooked to or detached from a train,
-         the number of wagons of the train should be reset
-         this method does the calculation */
         if (hasNoWagons()) {
             numberOfWagons = 0;
             return;
@@ -51,8 +47,6 @@ public class Train implements Iterable<Wagon> {
         return numberOfWagons;
     }
 
-    /* three helper methods that are usefull in other methods */
-
     public boolean hasNoWagons() {
         return (firstWagon == null);
     }
@@ -66,8 +60,6 @@ public class Train implements Iterable<Wagon> {
     }
 
     public int getPositionOfWagon(int wagonId) {
-        // find a wagon on a train by id, return the position (first wagon had position 1)
-        // if not found, than return -1
         int counter = 1;
         return posOfWagonRecursive(firstWagon, wagonId, counter);
     }
@@ -86,9 +78,6 @@ public class Train implements Iterable<Wagon> {
 
 
     public Wagon getWagonOnPosition(int position) {
-        /* find the wagon on a given position on the train
-         position of wagons start at 1 (firstWagon of train)
-         use exceptions to handle a position that does not exist */
         int counter = 1;
         return wagonOnPosRecursive(firstWagon, position, counter);
     }
@@ -107,8 +96,6 @@ public class Train implements Iterable<Wagon> {
     }
 
     public int getNumberOfSeats() {
-        /* give the total number of seats on a passenger train
-         for freight trains the result should be 0 */
         if (isFreightTrain()) {
             return 0;
         }
@@ -122,24 +109,10 @@ public class Train implements Iterable<Wagon> {
             sum += passengerWagon.getNumberOfSeats();
         }
 
-//        if (!w.hasNextWagon()) {
-//            sum += w.getNumberOfSeats();
-//        }
-//
-//        while (w.hasNextWagon()) {
-//            sum += w.getNumberOfSeats();
-//            w = (PassengerWagon) w.getNextWagon();
-//            if (!w.hasNextWagon()) {
-//                sum += w.getNumberOfSeats();
-//            }
-//        }
-
         return sum;
     }
 
     public int getTotalMaxWeight() {
-        /* give the total maximum weight of a freight train
-         for passenger trains the result should be 0 */
         if (isPassengerTrain()) {
             return 0;
         }
@@ -151,18 +124,6 @@ public class Train implements Iterable<Wagon> {
 
             sum += freightWagon.getMaxWeight();
         }
-
-//        if (!freightWagon.hasNextWagon()) {
-//            sum += freightWagon.getMaxWeight();
-//        }
-//
-//        while (freightWagon.hasNextWagon()) {
-//            sum += freightWagon.getMaxWeight();
-//            freightWagon = (FreightWagon) freightWagon.getNextWagon();
-//            if (!freightWagon.hasNextWagon()) {
-//                sum += freightWagon.getMaxWeight();
-//            }
-//        }
 
         return sum;
     }
@@ -186,6 +147,6 @@ public class Train implements Iterable<Wagon> {
 
     @Override
     public Iterator<Wagon> iterator() {
-        return this.iterator = new TrainIterator(firstWagon);
+        return new TrainIterator(firstWagon);
     }
 }
