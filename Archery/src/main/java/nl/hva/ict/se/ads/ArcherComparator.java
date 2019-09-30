@@ -1,4 +1,4 @@
-package nl.hva.ict.se.ads;
+package java.nl.hva.ict.se.ads;
 
 import java.util.Comparator;
 

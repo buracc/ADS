@@ -1,6 +1,7 @@
-package nl.hva.ict.se.ads;
+package java.nl.hva.ict.se.ads;
 
 import java.util.*;
+
 
 /**
  * Holds the name, archer-id and the points scored for 30 arrows.
