@@ -4,24 +4,25 @@ import java.util.*;
 
 /**
  * Holds the name, archer-id and the points scored for 30 arrows.
- *
+ * <p>
  * Archers MUST be created by using one of the generator methods. That is way the constructor is private and should stay
  * private. You are also not allowed to add any constructor with an access modifier other then private unless it is for
  * testing purposes in which case the reason why you need that constructor must be contained in a very clear manner
  * in your report.
  */
 public class Archer {
-    public static int MAX_ARROWS = 3;
-    public static int MAX_ROUNDS = 10;
-    public static int MISSES_WEIGHTED = 7;
+
+    public static final int MAX_ARROWS = 3;
+    public static final int MAX_ROUNDS = 10;
+    public static final int MISSES_WEIGHTED = 7;
     private static Random randomizer = new Random();
-    private int id; // Once assigned a value is not allowed to change.
-    private static int count = 135788;
 
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
+    private final int id; // Once assigned a value is not allowed to change.
 
-    private int[][] totalScore = new int[MAX_ROUNDS][MAX_ARROWS];;
+    private int[][] totalScore = new int[MAX_ROUNDS][MAX_ARROWS];
+
     private int total;
     private int weightedScore;
     private int misses;
@@ -33,36 +34,38 @@ public class Archer {
      * ID 135788;
      *
      * @param firstName the archers first name.
-     * @param lastName the archers surname.
+     * @param lastName  the archers surname.
      */
-    private Archer(String firstName, String lastName) {
+    private Archer(String firstName, String lastName, int id) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.id = count++;
+        this.id = id;
     }
 
     /**
      * Registers the point for each of the three arrows that have been shot during a round. The <code>points</code>
      * parameter should hold the three points, one per arrow.
      *
-     * @param round the round for which to register the points.
+     * @param round  the round for which to register the points.
      * @param points the points shot during the round.
      */
     public void registerScoreForRound(int round, int[] points) {
-        //Loop for each round given
-        for (int i = 0; i < MAX_ARROWS; i++){
+        for (int i = 0; i < points.length; i++) {
             totalScore[round][i] = points[i];
             total += totalScore[round][i];
+
+            if (totalScore[round][i] == 0) {
+                misses++;
+                continue;
+            }
+
+            weightedScore += totalScore[round][i] + 1;
         }
+
+        weightedScore -= misses * 7;
     }
 
     public int getTotalScore() {
-//        int total = 0;
-//        for (int i = 0; i < MAX_ROUNDS; i++){
-//            for (int j = 0; i < MAX_ARROWS; j++){
-//                total +=  totalScore[i][j];
-//            }
-//        }
         return total;
     }
 
@@ -74,13 +77,14 @@ public class Archer {
      */
     public static List<Archer> generateArchers(int nrOfArchers) {
         List<Archer> archers = new ArrayList<>(nrOfArchers);
+        int id = 135788;
         for (int i = 0; i < nrOfArchers; i++) {
-            Archer archer = new Archer(Names.nextFirstName(), Names.nextSurname());
+            Archer archer = new Archer(Names.nextFirstName(), Names.nextSurname(), id += 1);
             letArcherShoot(archer, nrOfArchers % 100 == 0);
             archers.add(archer);
         }
-        return archers;
 
+        return archers;
     }
 
     /**
@@ -118,17 +122,18 @@ public class Archer {
         return Math.max(min, randomizer.nextInt(11));
     }
 
-    private int calcWeightedScore(){
-        for (int i = 0; i < MAX_ROUNDS; i++){
-            for (int j = 0; j < MAX_ARROWS ; j++){
+    private int calcWeightedScore() {
+        for (int i = 0; i < MAX_ROUNDS; i++) {
+            for (int j = 0; j < MAX_ARROWS; j++) {
                 //Count the times a certain number comes
-                if (totalScore[i][j] == 0){
+                if (totalScore[i][j] == 0) {
                     misses += MISSES_WEIGHTED;
-                }else {
+                } else {
                     weightedScore += totalScore[i][j] + 1;
                 }
             }
         }
+
         return weightedScore - misses;
     }
 
@@ -138,6 +143,6 @@ public class Archer {
 
     @Override
     public String toString() {
-        return id + " ("+getTotalScore()+" / "+ calcWeightedScore() +") " + this.firstName + " " + this.lastName;
+        return id + " (" + getTotalScore() + " / " + getWeightedScore() + ") " + firstName + " " + lastName;
     }
 }

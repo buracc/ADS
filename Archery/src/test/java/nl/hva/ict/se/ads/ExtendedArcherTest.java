@@ -17,9 +17,10 @@ public class ExtendedArcherTest extends ArcherTest {
 
     @Test
     public void checkWinner(){
-        List<Archer> archers = Archer.generateArchers(3);
+        List<Archer> archers = Archer.generateArchers(10);
         ArcherComparator comparator = new ArcherComparator();
-        ChampionSelector.collectionSort(archers, comparator);
+        ChampionSelector.quickSort(archers, comparator);
+
         System.out.println(archers);
     }
 }
