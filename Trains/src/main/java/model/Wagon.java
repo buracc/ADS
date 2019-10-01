@@ -23,11 +23,10 @@ public abstract class Wagon {
      * @return the last Wagon attached.
      */
     public Wagon getLastWagonAttached() {
-        Wagon w = this;
-        if (!w.hasNextWagon()) {
-            return w;
+        if (!this.hasNextWagon()) {
+            return this;
         } else {
-            return w.getNextWagon().getLastWagonAttached();
+            return this.getNextWagon().getLastWagonAttached();
         }
     }
 

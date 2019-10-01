@@ -72,6 +72,7 @@ public class Train implements Iterable<Wagon> {
      * @return the amount of Wagons.
      */
     public int getNumberOfWagons() {
+        resetNumberOfWagons();
         return numberOfWagons;
     }
 
