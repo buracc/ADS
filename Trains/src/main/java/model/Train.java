@@ -50,7 +50,6 @@ public class Train implements Iterable<Wagon> {
             numberOfWagons = 0;
             return;
         }
-
         numberOfWagons = 1;
         numberOfWagonsRecursive(getFirstWagon());
     }
@@ -64,7 +63,6 @@ public class Train implements Iterable<Wagon> {
         if (!wagon.hasNextWagon()) {
             return wagon;
         }
-
         numberOfWagons++;
         return numberOfWagonsRecursive(wagon.getNextWagon());
     }
@@ -152,11 +150,9 @@ public class Train implements Iterable<Wagon> {
             if (counter == position) {
                 return wagon;
             }
-
             if (!wagon.hasNextWagon()) {
                 throw new IndexOutOfBoundsException("Position does not exist on train.");
             }
-
             return wagonOnPosRecursive(wagon.getNextWagon(), position, ++counter);
     }
 
@@ -168,7 +164,6 @@ public class Train implements Iterable<Wagon> {
         if (isFreightTrain()) {
             return 0;
         }
-
 
         int sum = 0;
 

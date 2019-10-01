@@ -1,4 +1,4 @@
-package java.nl.hva.ict.se.ads;
+package nl.hva.ict.se.ads;
 
 import java.util.*;
 
