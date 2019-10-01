@@ -16,7 +16,6 @@ public class ChampionSelector {
 
         for (int i = 1; i < archers.size(); i++) {
             int j = i - 1;
-
             while (j >= 0 && scoringScheme.compare(archers.get(j), archers.get(j + 1)) < 0) {
                 tempPrev = archers.get(j);
                 archers.set(j, archers.get(j + 1));
@@ -24,10 +23,17 @@ public class ChampionSelector {
                 j--;
             }
         }
-
         return archers;
     }
 
+    /**
+     * This method uses quick sort to sort the list of archers
+     * @param archers the list of archers
+     * @param scoringScheme the comparator needed to compare the archers with each other
+     * @param first the first indeze in the list
+     * @param last the last index in the list
+     * @return a list of quick sorted archers
+     */
     private static List<Archer> quickSort(List<Archer> archers, Comparator<Archer> scoringScheme, int first, int last) {
         int firstIndex = first;
         int lastIndex = last;

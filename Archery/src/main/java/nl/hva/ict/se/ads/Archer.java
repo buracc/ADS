@@ -66,6 +66,11 @@ public class Archer {
         weightedScore -= misses * 7;
     }
 
+    /**
+     * Returns the total score of the archer from all the 10 rounds
+     * @return total score
+     */
+
     public int getTotalScore() {
         return total;
     }
@@ -101,16 +106,31 @@ public class Archer {
         return null;
     }
 
+
+    /**
+     * Returns the id of the archer
+     * @return id of archer
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * This method lets the archer shoot for all rounds and registers teh score
+     * @param archer the given archer
+     * @param isBeginner checks if the archer is a beginner
+     */
     private static void letArcherShoot(Archer archer, boolean isBeginner) {
         for (int round = 0; round < MAX_ROUNDS; round++) {
             archer.registerScoreForRound(round, shootArrows(isBeginner ? 0 : 1));
         }
     }
 
+    /**
+     * This method registers the score for a single round, for 3 times (maximum arrows shot)
+     * @param min minimum score registered
+     * @return an array of 3 numbers which are the scores achieved that round
+     */
     private static int[] shootArrows(int min) {
         int[] points = new int[MAX_ARROWS];
         for (int arrow = 0; arrow < MAX_ARROWS; arrow++) {
@@ -119,25 +139,19 @@ public class Archer {
         return points;
     }
 
+    /**
+     * This method generates a random number depending if the archer is a beginner or not
+     * @param min if the archer is a beginner the minimum is 0 else it's 1
+     * @return returns a random number between min and 10
+     */
     private static int shoot(int min) {
         return Math.max(min, randomizer.nextInt(11));
     }
 
-    private int calcWeightedScore() {
-        for (int i = 0; i < MAX_ROUNDS; i++) {
-            for (int j = 0; j < MAX_ARROWS; j++) {
-                //Count the times a certain number comes
-                if (totalScore[i][j] == 0) {
-                    misses += MISSES_WEIGHTED;
-                } else {
-                    weightedScore += totalScore[i][j] + 1;
-                }
-            }
-        }
-
-        return weightedScore - misses;
-    }
-
+    /**
+     * This method returns the weighted score of the archer
+     * @return weighted score
+     */
     public int getWeightedScore() {
         return weightedScore;
     }

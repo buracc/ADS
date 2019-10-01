@@ -5,10 +5,18 @@ import java.util.Random;
 public class Names {
     private static Random randomizer = new Random();
 
+    /**
+     * This method returns a random first name for an archer
+     * @return random first name
+     */
     public static String nextFirstName() {
         return firstNames[randomizer.nextInt(firstNames.length)];
     }
 
+    /**
+     * This method returns a random surname for an archer
+     * @return random surname
+     */
     public static String nextSurname() {
         return surnames[randomizer.nextInt(surnames.length)];
     }
