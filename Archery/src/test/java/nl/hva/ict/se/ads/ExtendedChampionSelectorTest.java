@@ -20,4 +20,16 @@ public class ExtendedChampionSelectorTest extends ChampionSelectorTest {
         ChampionSelector.collectionSort(archersCollectionSort, comparator);
         assertEquals(archersCollectionSort, archersQuickSort);
     }
+
+    //Add a test that counts the time for execution
+    @Test
+    public void milisCounter(){
+        long startingTime = System.currentTimeMillis();
+        for (int numberOfArch = 100; numberOfArch < 5000000; numberOfArch *= 2){
+            List<Archer> list = Archer.generateArchers(numberOfArch);
+            ChampionSelector.quickSort(list, comparator);
+            long endTime = System.currentTimeMillis();
+            System.out.println(numberOfArch + " : " + (endTime - startingTime));
+        }
+    }
 }
