@@ -1,5 +1,6 @@
 package nl.hva.ict.se.ads;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -34,49 +35,57 @@ public class ChampionSelector {
      * @param last the last index in the list
      * @return a list of quick sorted archers
      */
-    private static List<Archer> quickSort(List<Archer> archers, Comparator<Archer> scoringScheme, int first, int last) {
-        int firstIndex = first;
-        int lastIndex = last;
+    private static int partition(List<Archer> archers, Comparator<Archer> scoringScheme, int first, int last) {
+        int firstCounter = first;
+        int lastCounter = last+1;
+        int pivot = first;
 
-        if (archers.size() <= 1) {
-            return archers;
-        }
-
-        Archer pivot = archers.get(firstIndex + (lastIndex - firstIndex) / 2);
-
-        while (firstIndex <= lastIndex) {
-            while (scoringScheme.compare(archers.get(firstIndex), pivot) > 0) {
-                firstIndex++;
+        while (true) {
+            while (scoringScheme.compare(archers.get(++firstCounter), archers.get(pivot)) > 0) {
+                if (firstCounter == last){
+                    break;
+                }
             }
 
-            while (scoringScheme.compare(pivot, archers.get(lastIndex)) > 0) {
-                lastIndex--;
+            while (scoringScheme.compare(archers.get(pivot), archers.get(--lastCounter)) > 0) {
+                if (lastCounter == first){
+                    break;
+                }
             }
 
-            if (firstIndex <= lastIndex) {
-                Archer firstPlayer = archers.get(firstIndex);
-                archers.set(firstIndex, archers.get(lastIndex));
-                archers.set(lastIndex, firstPlayer);
-                firstIndex++;
-                lastIndex--;
+            if (firstCounter >= lastCounter){
+                break;
             }
+            //Swap archers.get(firstCounter) met archers.get(lastCounter)
+            Archer temp = archers.get(firstCounter);
+            archers.set(firstCounter, archers.get(lastCounter));
+            archers.set(lastCounter, temp);
         }
-
-        if (first < lastIndex) {
-            quickSort(archers, scoringScheme, first, lastIndex);
-        }
-        if (firstIndex < last) {
-            quickSort(archers, scoringScheme, firstIndex, last);
-        }
-
-        return archers;
+        //Swap places with archers.get(pivot) and archers.get(lastCoutner)
+        //Set pivot equal to lastCounter, because lastCounter is the "last" lower number of the pivot
+        Archer temp = archers.get(pivot);
+        archers.set(pivot, archers.get(lastCounter));
+        archers.set(lastCounter, temp);
+        pivot = lastCounter;
+        return pivot;
     }
 
     /**
      * This method uses quick sort for sorting the archers.
      */
     public static List<Archer> quickSort(List<Archer> archers, Comparator<Archer> scoringScheme) {
-        return quickSort(archers, scoringScheme, 0, archers.size() - 1);
+        Collections.shuffle(archers);
+        benis(archers, scoringScheme, 0, archers.size() - 1);
+        return archers;
+    }
+
+    private static void benis(List<Archer> archers, Comparator<Archer> scoringScheme, int low, int high){
+        if (low >= high){
+            return;
+        }
+        int pivot = partition(archers, scoringScheme, low, high);
+        benis(archers, scoringScheme, low, pivot-1);
+        benis(archers, scoringScheme, pivot+1, high);
     }
 
     /**

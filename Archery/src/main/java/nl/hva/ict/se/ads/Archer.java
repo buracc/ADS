@@ -15,7 +15,6 @@ public class Archer {
 
     public static final int MAX_ARROWS = 3;
     public static final int MAX_ROUNDS = 10;
-    public static final int MISSES_WEIGHTED = 7;
     private static Random randomizer = new Random();
 
     private final String firstName;
