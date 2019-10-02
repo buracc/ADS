@@ -15,10 +15,10 @@ public class ArcherComparator implements Comparator<Archer> {
      */
     public Archer getWinner(Archer a1, Archer a2) {
         if (compare(a1, a2) < 0) {
-            return a2;
+            return a1;
         }
 
-        return a1;
+        return a2;
     }
 
     /**
