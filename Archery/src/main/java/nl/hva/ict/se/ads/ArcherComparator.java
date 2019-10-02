@@ -17,7 +17,6 @@ public class ArcherComparator implements Comparator<Archer> {
         if (compare(a1, a2) < 0) {
             return a1;
         }
-
         return a2;
     }
 

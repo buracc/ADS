@@ -73,4 +73,30 @@ public class ExtendedArcherTest extends ArcherTest {
 
     }
 
+    @Test
+    public void checkRegisterScore(){
+        Archer archer = new Archer("Bob", "Ross");
+        int[] points = {5,6,1};
+        archer.registerScoreForRound(3, points);
+        assertEquals(12, archer.getTotalScore());
+        assertEquals(12+3, archer.getWeightedScore());
+        archer.registerScoreForRound(1, points);
+        assertEquals(12*2, archer.getTotalScore());
+        assertEquals((12+3)*2, archer.getWeightedScore());
+    }
+
+    @Test
+    public void checkRegisterScoreRound(){
+        Archer archer = new Archer("Bob", "Ross");
+        int[] points = {5,6,1};
+        archer.registerScoreForRound(11,points);
+    }
+
+    @Test
+    public void checkRegisterScorePoints(){
+        Archer archer = new Archer("Bob", "Ross");
+        int[] points = {5,6,1,3,1};
+        archer.registerScoreForRound(8,points);
+    }
+
 }

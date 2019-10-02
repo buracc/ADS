@@ -64,6 +64,9 @@ public class Archer {
      * @param points the points shot during the round.
      */
     public void registerScoreForRound(int round, int[] points) {
+        if (round >= MAX_ROUNDS || points.length-1 >= MAX_ARROWS){
+            throw new IndexOutOfBoundsException("YOU'VE INSERT MORE THAN THE LIMIT!");
+        }
         for (int i = 0; i < points.length; i++) {
             totalScore[round][i] = points[i];
             total += totalScore[round][i];
