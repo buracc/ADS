@@ -29,13 +29,13 @@ public class ArcherComparator implements Comparator<Archer> {
      */
     @Override
     public int compare(Archer o1, Archer o2) {
-        int winner = o1.getTotalScore() - o2.getTotalScore();
+        int winner = o2.getTotalScore() - o1.getTotalScore();
         if (winner == 0) {
-            winner = o1.getWeightedScore() - o2.getWeightedScore();
+            winner = o2.getWeightedScore() - o1.getWeightedScore();
         }
 
         if (winner == 0) {
-            winner = o1.getId() - o2.getId();
+            winner = o2.getId() - o1.getId();
         }
 
         return winner;

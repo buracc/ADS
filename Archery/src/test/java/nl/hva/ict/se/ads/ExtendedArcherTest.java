@@ -1,7 +1,6 @@
 package nl.hva.ict.se.ads;
 
 import org.junit.jupiter.api.Test;
-import nl.hva.ict.se.ads.*;
 
 
 import java.util.List;
