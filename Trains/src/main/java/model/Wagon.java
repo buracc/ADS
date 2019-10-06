@@ -12,6 +12,7 @@ public abstract class Wagon {
 
     /**
      * Constructs a Wagon with an ID.
+     *
      * @param wagonId ID number of the Wagon.
      */
     public Wagon(int wagonId) {
@@ -20,18 +21,20 @@ public abstract class Wagon {
 
     /**
      * Gets the last Wagon attached to this Wagon.
+     *
      * @return the last Wagon attached.
      */
     public Wagon getLastWagonAttached() {
-        if (!this.hasNextWagon()) {
+        if (!hasNextWagon()) {
             return this;
-        } else {
-            return this.getNextWagon().getLastWagonAttached();
         }
+
+        return getNextWagon().getLastWagonAttached();
     }
 
     /**
      * Links a new next Wagon to this Wagon.
+     *
      * @param nextWagon the Wagon to link this Wagon to.
      */
     public void setNextWagon(Wagon nextWagon) {
@@ -45,6 +48,7 @@ public abstract class Wagon {
 
     /**
      * Gets the link to the previous Wagon attached to this Wagon.
+     *
      * @return the previous Wagon.
      */
     public Wagon getPreviousWagon() {
@@ -53,6 +57,7 @@ public abstract class Wagon {
 
     /**
      * Links a new next Wagon to this Wagon.
+     *
      * @param previousWagon the Wagon to link this Wagon to.
      */
     public void setPreviousWagon(Wagon previousWagon) {
@@ -61,6 +66,7 @@ public abstract class Wagon {
 
     /**
      * Gets the link to the next Wagon attached to this Wagon.
+     *
      * @return the next Wagon.
      */
     public Wagon getNextWagon() {
@@ -69,6 +75,7 @@ public abstract class Wagon {
 
     /**
      * Gets the ID number of the Wagon.
+     *
      * @return the Wagon ID.
      */
     public int getWagonId() {
@@ -77,6 +84,7 @@ public abstract class Wagon {
 
     /**
      * Recursively counts the number of Wagons attached to this Wagon.
+     *
      * @return the number of Wagons attached.
      */
     public int getNumberOfWagonsAttached() {
@@ -86,19 +94,21 @@ public abstract class Wagon {
 
     /**
      * Recursively iterates through all Wagons and counts them.
+     *
      * @param counter the current count of Wagons.
      * @return the current amount of Wagons.
      */
-    public int numberAttachedRecursive(int counter) {
-        if (!this.hasNextWagon()) {
+    private int numberAttachedRecursive(int counter) {
+        if (!hasNextWagon()) {
             return counter;
         }
 
-        return this.getNextWagon().numberAttachedRecursive(++counter);
+        return getNextWagon().numberAttachedRecursive(++counter);
     }
 
     /**
      * Checks if there's a link to a next Wagon on this Wagon.
+     *
      * @return true if a next Wagon is attached.
      */
     public boolean hasNextWagon() {
@@ -107,6 +117,7 @@ public abstract class Wagon {
 
     /**
      * Checks if there's a link to a previous Wagon on this Wagon.
+     *
      * @return true if a previous Wagon is attached.
      */
     public boolean hasPreviousWagon() {
