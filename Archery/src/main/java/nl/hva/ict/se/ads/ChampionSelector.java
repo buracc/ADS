@@ -17,7 +17,7 @@ public class ChampionSelector {
 
         for (int i = 1; i < archers.size(); i++) {
             int j = i - 1;
-            while (j >= 0 && scoringScheme.compare(archers.get(j), archers.get(j + 1)) < 0) {
+            while (j >= 0 && scoringScheme.compare(archers.get(j), archers.get(j + 1)) > 0) {
                 tempPrev = archers.get(j);
                 archers.set(j, archers.get(j + 1));
                 archers.set(j + 1, tempPrev);
@@ -41,18 +41,21 @@ public class ChampionSelector {
         int pivot = first;
 
         while (true) {
-            while (scoringScheme.compare(archers.get(++firstCounter), archers.get(pivot)) > 0) {
+            while (scoringScheme.compare(archers.get(++firstCounter), archers.get(pivot)) < 0) {
                 if (firstCounter == last){
+                    //All the archers are lesser than the pivot
                     break;
                 }
             }
 
-            while (scoringScheme.compare(archers.get(pivot), archers.get(--lastCounter)) > 0) {
+            while (scoringScheme.compare(archers.get(pivot), archers.get(--lastCounter)) < 0) {
                 if (lastCounter == first){
+                    //All the archers are greater than the pivot
                     break;
                 }
             }
 
+            //If the counters cross, that means we've iterated through "all" the archers
             if (firstCounter >= lastCounter){
                 break;
             }

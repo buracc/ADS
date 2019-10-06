@@ -42,6 +42,20 @@ public class Archer {
         this.id = id;
     }
 
+    public Archer(String firstName, String lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = 1;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public void setWeightedScore(int weightedScore) {
+        this.weightedScore = weightedScore;
+    }
+
     /**
      * Registers the point for each of the three arrows that have been shot during a round. The <code>points</code>
      * parameter should hold the three points, one per arrow.
@@ -50,6 +64,9 @@ public class Archer {
      * @param points the points shot during the round.
      */
     public void registerScoreForRound(int round, int[] points) {
+        if (round >= MAX_ROUNDS || points.length-1 >= MAX_ARROWS){
+            throw new IndexOutOfBoundsException("YOU'VE INSERT MORE THAN THE LIMIT!");
+        }
         for (int i = 0; i < points.length; i++) {
             totalScore[round][i] = points[i];
             total += totalScore[round][i];
@@ -84,7 +101,7 @@ public class Archer {
         List<Archer> archers = new ArrayList<>(nrOfArchers);
         int id = 135788;
         for (int i = 0; i < nrOfArchers; i++) {
-            Archer archer = new Archer(Names.nextFirstName(), Names.nextSurname(), id += 1);
+            Archer archer = new Archer(Names.nextFirstName(), Names.nextSurname(), id++);
             letArcherShoot(archer, nrOfArchers % 100 == 0);
             archers.add(archer);
         }
