@@ -62,7 +62,7 @@ public class Shunter {
      * @return boolean value based on if the action was successfully completed.
      */
     public static boolean hookWagonOnTrainRear(Train train, Wagon wagon) {
-        if (train.hasNoWagons()) {
+        if (train.hasNoWagons() && hasPlaceForWagons(train, wagon)) {
             train.setFirstWagon(wagon);
             train.resetNumberOfWagons();
             return true;
@@ -85,7 +85,7 @@ public class Shunter {
      * @return boolean value based on if the action was successfully completed.
      */
     public static boolean hookWagonOnTrainFront(Train train, Wagon wagon) {
-        if (train.hasNoWagons()) {
+        if (train.hasNoWagons() && hasPlaceForWagons(train, wagon)) {
             train.setFirstWagon(wagon);
             train.resetNumberOfWagons();
             return true;

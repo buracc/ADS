@@ -5,6 +5,15 @@ import model.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+TODO:
+- check if firstwagon != null
+- check hasplaceforwagons with hasnowagons
+- wagononposrecursive fix
+    - start on pos and decrement
+    - check if given pos > max wagons
+ **/
+
 public class TrainLauncher {
 
     public static void main(String[] args) {

@@ -74,6 +74,30 @@ public class TrainsTest {
 
     /** Start **/
 
+    /** New Tests **/
+    @Test
+    public void checkFalseWagon(){
+        makeTrains();
+        firstPassengerTrain.getWagonOnPosition(12);
+        //This test should throw an exception, because the given position doesnt exist
+    }
+
+    @Test
+    public void checkHasPlaceForWagonsEmptyTrain(){
+        makeWagons();
+        Locomotive smallLocomotive = new Locomotive(1234, 1);
+        Train emptyTrain = new Train(smallLocomotive, "Osaka", "Amsterdam");
+        assertFalse(Shunter.hookWagonOnTrainRear(emptyTrain, w1));
+    }
+
+    @Test
+    public void checkFalsePosition(){
+        makeTrains();
+        assertEquals(-1, firstPassengerTrain.getPositionOfWagon(100));
+        assertEquals(-1, secondPassengerTrain.getPositionOfWagon(100));
+    }
+    /** End new tests **/
+
     @Test
     public void correctIdOfLast(){
         makeTrains();
