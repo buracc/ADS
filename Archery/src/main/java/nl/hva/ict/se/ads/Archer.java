@@ -89,7 +89,7 @@ public class Archer {
      * @return totalScore score
      */
 
-    public int getTotalScorePerRound() {
+    public int getTotalScore() {
         return totalScore;
     }
 
@@ -181,6 +181,6 @@ public class Archer {
 
     @Override
     public String toString() {
-        return id + " (" + getTotalScorePerRound() + " / " + getTotalWeightedScore() + ") " + firstName + " " + lastName;
+        return id + " (" + getTotalScore() + " / " + getTotalWeightedScore() + ") " + firstName + " " + lastName;
     }
 }

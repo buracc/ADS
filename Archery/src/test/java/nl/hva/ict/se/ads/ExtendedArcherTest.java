@@ -77,10 +77,10 @@ public class ExtendedArcherTest extends ArcherTest {
         Archer archer = new Archer("Bob", "Ross");
         int[] points = {5,6,1};
         archer.registerScoreForRound(3, points);
-        assertEquals(12, archer.getTotalScorePerRound());
+        assertEquals(12, archer.getTotalScore());
         assertEquals(12+3, archer.getTotalWeightedScore());
         archer.registerScoreForRound(1, points);
-        assertEquals(12*2, archer.getTotalScorePerRound());
+        assertEquals(12*2, archer.getTotalScore());
         assertEquals((12+3)*2, archer.getTotalWeightedScore());
     }
 
@@ -98,6 +98,16 @@ public class ExtendedArcherTest extends ArcherTest {
         archer.registerScoreForRound(8,points);
     }
 
-    //Weighted score test
+    @Test
+    public void checkWeightedScorre(){
+        Archer archer = new Archer("Bob", "Ross");
+        int[] points = {5,6,1};
+        archer.registerScoreForRound(0, points);
+        int totalScore = archer.getTotalScore();
+        int totalWeightedScore = archer.getTotalWeightedScore();
+        int expectedWeightedScore = totalScore + 3;
+        assertEquals(expectedWeightedScore, totalWeightedScore);
+
+    }
 
 }
