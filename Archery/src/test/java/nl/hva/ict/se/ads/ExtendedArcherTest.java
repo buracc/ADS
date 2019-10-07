@@ -25,11 +25,6 @@ public class ExtendedArcherTest extends ArcherTest {
         archers.get(1).setTotalScore(200);
         ArcherComparator comparator = new ArcherComparator();
         System.out.println(archers);
-<<<<<<< Updated upstream
-
-        //The highest should have the last index
-=======
->>>>>>> Stashed changes
         assertTrue(comparator.compare(archers.get(0), archers.get(1)) > 0);
         assertEquals(comparator.getWinner(archers.get(0), archers.get(1)), archers.get(1));
     }
@@ -43,11 +38,6 @@ public class ExtendedArcherTest extends ArcherTest {
         archers.get(1).setTotalWeightedScore(200);
         ArcherComparator comparator = new ArcherComparator();
         System.out.println(archers);
-<<<<<<< Updated upstream
-
-        //The highest should have the last index
-=======
->>>>>>> Stashed changes
         assertTrue(comparator.compare(archers.get(0), archers.get(1)) > 0);
         assertEquals(comparator.getWinner(archers.get(0), archers.get(1)), archers.get(1));
     }
@@ -61,11 +51,6 @@ public class ExtendedArcherTest extends ArcherTest {
         archers.get(1).setTotalWeightedScore(100);
         ArcherComparator comparator = new ArcherComparator();
         System.out.println(archers);
-<<<<<<< Updated upstream
-
-        //The highest should have the last index
-=======
->>>>>>> Stashed changes
         assertTrue(comparator.compare(archers.get(0), archers.get(1)) > 0);
         assertEquals(archers.get(1), comparator.getWinner(archers.get(0), archers.get(1)));
     }
@@ -86,23 +71,16 @@ public class ExtendedArcherTest extends ArcherTest {
     public void checkRegisterScoreRoundThrow() {
         Archer archer = new Archer("Bob", "Ross");
         int[] points = {5, 6, 1};
-<<<<<<< Updated upstream
         assertThrows(IndexOutOfBoundsException.class, () -> archer.registerScoreForRound(11, points));
-=======
-        archer.registerScoreForRound(11, points);
->>>>>>> Stashed changes
+
     }
 
     @Test
     public void checkRegisterScorePointsThrow() {
         Archer archer = new Archer("Bob", "Ross");
         int[] points = {5, 6, 1, 3, 1};
-<<<<<<< Updated upstream
-
         assertThrows(IndexOutOfBoundsException.class, () -> archer.registerScoreForRound(8, points));
-=======
-        archer.registerScoreForRound(8, points);
->>>>>>> Stashed changes
+
     }
 
     @Test
