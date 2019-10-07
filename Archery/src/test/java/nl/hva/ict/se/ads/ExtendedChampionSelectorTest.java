@@ -1,5 +1,6 @@
 package nl.hva.ict.se.ads;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,24 +13,40 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class ExtendedChampionSelectorTest extends ChampionSelectorTest {
 
+    private List<Archer> collectionSortList;
+    private List<Archer> insertionSortList;
+    private List<Archer> quickSortList;
+
+    public void creatLists(int nrArchers){
+        collectionSortList = Archer.generateArchers(nrArchers);
+        insertionSortList = new ArrayList<>(collectionSortList);
+        quickSortList = new ArrayList<>(collectionSortList);
+    }
+
     @Test
     public void checkQuickSort(){
-        List<Archer> archersQuickSort = Archer.generateArchers(23);
-        List<Archer> archersCollectionSort = new ArrayList<>(archersQuickSort);
-        ChampionSelector.quickSort(archersQuickSort, comparator);
-        ChampionSelector.collectionSort(archersCollectionSort, comparator);
-        assertEquals(archersCollectionSort, archersQuickSort);
+        creatLists(23);
+        ChampionSelector.quickSort(quickSortList, comparator);
+        ChampionSelector.collectionSort(collectionSortList, comparator);
+        assertEquals(collectionSortList, quickSortList);
     }
 
     //Add a test that counts the time for execution
     @Test
     public void milisCounter(){
-        long startingTime = System.currentTimeMillis();
-        for (int numberOfArch = 100; numberOfArch < 5000000; numberOfArch *= 2){
-            List<Archer> list = Archer.generateArchers(numberOfArch);
-            ChampionSelector.quickSort(list, comparator);
+        long diff = 0;
+        //All sorts in 1 method, use the same list of Archers for each sort
+        for (int numberOfArch = 100; numberOfArch < 5_000_000 && diff <= 20000; numberOfArch *= 2){
+            creatLists(numberOfArch);
+
+            long startingTime = System.currentTimeMillis();
+
+            ChampionSelector.quickSort(quickSortList, comparator);
+
             long endTime = System.currentTimeMillis();
-            System.out.println(numberOfArch + " : " + (endTime - startingTime));
+            diff = endTime - startingTime;
+
+            System.out.println(numberOfArch + " : " + diff);
         }
     }
 }
