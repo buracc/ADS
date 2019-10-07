@@ -14,8 +14,6 @@ class ChampionSelectorTest {
 
     @BeforeEach
     public void createComparator() {
-        // Instantiate your own comparator here...
-        // comparator = new .....();
         comparator = new ArcherComparator();
     }
 

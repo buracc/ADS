@@ -28,13 +28,13 @@ public class ChampionSelector {
     }
 
     /**
-     * This method uses quick sort to sort the list of archers
+     * This method uses quick sort to sort the list of Archers.
      *
-     * @param archers       the list of archers
-     * @param scoringScheme the comparator needed to compare the archers with each other
-     * @param first         the first indeze in the list
-     * @param last          the last index in the list
-     * @return a list of quick sorted archers
+     * @param archers       the list of Archers.
+     * @param scoringScheme the comparator needed to compare the archers with each other.
+     * @param first         the first index in the list.
+     * @param last          the last index in the list.
+     * @return a list of sorted Archers.
      */
     private static int partition(List<Archer> archers, Comparator<Archer> scoringScheme, int first, int last) {
         int firstCounter = first;
@@ -44,29 +44,22 @@ public class ChampionSelector {
         while (true) {
             while (scoringScheme.compare(archers.get(++firstCounter), archers.get(pivot)) < 0) {
                 if (firstCounter == last) {
-                    //All the archers are lesser than the pivot
                     break;
                 }
             }
 
             while (scoringScheme.compare(archers.get(pivot), archers.get(--lastCounter)) < 0) {
                 if (lastCounter == first) {
-                    //All the archers are greater than the pivot
                     break;
                 }
             }
-
-            //If the counters cross, that means we've iterated through "all" the archers
             if (firstCounter >= lastCounter) {
                 break;
             }
-            //Swap archers.get(firstCounter) met archers.get(lastCounter)
             Archer temp = archers.get(firstCounter);
             archers.set(firstCounter, archers.get(lastCounter));
             archers.set(lastCounter, temp);
         }
-        //Swap places with archers.get(pivot) and archers.get(lastCoutner)
-        //Set pivot equal to lastCounter, because lastCounter is the "last" lower number of the pivot
         Archer temp = archers.get(pivot);
         archers.set(pivot, archers.get(lastCounter));
         archers.set(lastCounter, temp);
@@ -83,6 +76,12 @@ public class ChampionSelector {
         return archers;
     }
 
+    /**
+     * @param archers       the list of Archers.
+     * @param scoringScheme the comparator needed to compare the archers with each other.
+     * @param low           the first index in the list.
+     * @param high          the last index in the list.
+     */
     private static void quickSort(List<Archer> archers, Comparator<Archer> scoringScheme, int low, int high) {
         if (low >= high) {
             return;

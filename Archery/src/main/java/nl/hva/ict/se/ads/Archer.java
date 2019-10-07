@@ -19,7 +19,7 @@ public class Archer {
 
     private final String firstName;
     private final String lastName;
-    private final int id; // Once assigned a value is not allowed to change.
+    private final int id;
 
     private int[][] totalScorePerRound = new int[MAX_ROUNDS][MAX_ARROWS];
 
@@ -33,8 +33,8 @@ public class Archer {
      * is a assigned a number that is 1 higher than the last one assigned. The first instance created should have
      * ID 135788;
      *
-     * @param firstName the archers first name.
-     * @param lastName  the archers surname.
+     * @param firstName the Archers first name.
+     * @param lastName  the Archers surname.
      */
     private Archer(String firstName, String lastName, int id) {
         this.firstName = firstName;
@@ -48,6 +48,10 @@ public class Archer {
         this.id = 1;
     }
 
+    /**
+     * Sets the total score of the Archer.
+     * @param totalScore the new total score.
+     */
     public void setTotalScore(int totalScore) {
         this.totalScore = totalScore;
     }
@@ -64,10 +68,6 @@ public class Archer {
      * @param points the points shot during the round.
      */
     public void registerScoreForRound(int round, int[] points) throws IndexOutOfBoundsException {
-//        if (round >= MAX_ROUNDS || points.length - 1 >= MAX_ARROWS) {
-//            throw new IndexOutOfBoundsException("YOU'VE INSERT MORE THAN THE LIMIT!");
-//        }
-
         for (int i = 0; i < points.length; i++) {
             totalScorePerRound[round][i] = points[i];
             totalScore += totalScorePerRound[round][i];
@@ -84,9 +84,9 @@ public class Archer {
     }
 
     /**
-     * Returns the totalScore score of the archer from all the 10 rounds
+     * Returns the totalScore score of the Archer.
      *
-     * @return totalScore score
+     * @return totalScore .
      */
 
     public int getTotalScore() {
@@ -94,10 +94,10 @@ public class Archer {
     }
 
     /**
-     * This methods creates a List of archers.
+     * This methods creates a List of Archers.
      *
-     * @param nrOfArchers the number of archers in the list.
-     * @return
+     * @param nrOfArchers the number of Archers in the list.
+     * @return a list of Archers.
      */
     public static List<Archer> generateArchers(int nrOfArchers) {
         List<Archer> archers = new ArrayList<>(nrOfArchers);
@@ -112,12 +112,12 @@ public class Archer {
     }
 
     /**
-     * This methods creates a Iterator that can be used to generate all the required archers. If you implement this
+     * This methods creates a Iterator that can be used to generate all the required Archers. If you implement this
      * method it is only allowed to create an instance of Archer inside the next() method!
      *
      * <b>THIS METHODS IS OPTIONAL</b>
      *
-     * @param nrOfArchers the number of archers the Iterator will create.
+     * @param nrOfArchers the number of Archers the Iterator will create.
      * @return
      */
     public static Iterator<Archer> generateArchers(long nrOfArchers) {
@@ -126,19 +126,19 @@ public class Archer {
 
 
     /**
-     * Returns the id of the archer
+     * Returns the id of the Archer.
      *
-     * @return id of archer
+     * @return id of Archer.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * This method lets the archer shoot for all rounds and registers teh score
+     * This method lets the Archer shoot for all rounds and registers the score.
      *
-     * @param archer     the given archer
-     * @param isBeginner checks if the archer is a beginner
+     * @param archer the given Archer
+     * @param isBeginner checks if the Archer is a beginner
      */
     private static void letArcherShoot(Archer archer, boolean isBeginner) {
         for (int round = 0; round < MAX_ROUNDS; round++) {
@@ -147,10 +147,10 @@ public class Archer {
     }
 
     /**
-     * This method registers the score for a single round, for 3 times (maximum arrows shot)
+     * This method registers the score for a single round, for 3 times (maximum arrows shot).
      *
-     * @param min minimum score registered
-     * @return an array of 3 numbers which are the scores achieved that round
+     * @param min minimum score registered.
+     * @return an array consisting of the points achieved.
      */
     private static int[] shootArrows(int min) {
         int[] points = new int[MAX_ARROWS];
@@ -161,19 +161,19 @@ public class Archer {
     }
 
     /**
-     * This method generates a random number depending if the archer is a beginner or not
+     * This method generates a random number depending on the Archer if it's a beginner or not.
      *
-     * @param min if the archer is a beginner the minimum is 0 else it's 1
-     * @return returns a random number between min and 10
+     * @param min if the Archer is a beginner the minimum is 0 else it's 1.
+     * @return returns a random number between min and 10.
      */
     private static int shoot(int min) {
         return Math.max(min, randomizer.nextInt(11));
     }
 
     /**
-     * This method returns the weighted score of the archer
+     * This method returns the weighted score of the Archer.
      *
-     * @return weighted score
+     * @return weighted score.
      */
     public int getTotalWeightedScore() {
         return totalWeightedScore;
