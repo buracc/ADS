@@ -22,8 +22,8 @@ public class ExtendedArcherTest extends ArcherTest {
     public void checkWinnerHigherScore(){
         List<Archer> archers = Archer.generateArchers(2);
 
-        archers.get(0).setTotal(100);
-        archers.get(1).setTotal(200);
+        archers.get(0).setTotalScore(100);
+        archers.get(1).setTotalScore(200);
 
         ArcherComparator comparator = new ArcherComparator();
 
@@ -38,11 +38,11 @@ public class ExtendedArcherTest extends ArcherTest {
     public void checkWinnerHigherWeighted(){
         List<Archer> archers = Archer.generateArchers(2);
 
-        archers.get(0).setTotal(100);
-        archers.get(1).setTotal(100);
+        archers.get(0).setTotalScore(100);
+        archers.get(1).setTotalScore(100);
 
-        archers.get(0).setWeightedScore(100);
-        archers.get(1).setWeightedScore(200);
+        archers.get(0).setTotalWeightedScore(100);
+        archers.get(1).setTotalWeightedScore(200);
 
         ArcherComparator comparator = new ArcherComparator();
 
@@ -57,11 +57,11 @@ public class ExtendedArcherTest extends ArcherTest {
     public void checkWinnerHigherId(){
         List<Archer> archers = Archer.generateArchers(2);
 
-        archers.get(0).setTotal(100);
-        archers.get(1).setTotal(100);
+        archers.get(0).setTotalScore(100);
+        archers.get(1).setTotalScore(100);
 
-        archers.get(0).setWeightedScore(100);
-        archers.get(1).setWeightedScore(100);
+        archers.get(0).setTotalWeightedScore(100);
+        archers.get(1).setTotalWeightedScore(100);
 
         ArcherComparator comparator = new ArcherComparator();
 
@@ -70,7 +70,6 @@ public class ExtendedArcherTest extends ArcherTest {
         //The highest should have the last index
         assertTrue(comparator.compare(archers.get(0),archers.get(1)) > 0);
         assertEquals(archers.get(1), comparator.getWinner(archers.get(0), archers.get(1)));
-
     }
 
     @Test
@@ -78,25 +77,27 @@ public class ExtendedArcherTest extends ArcherTest {
         Archer archer = new Archer("Bob", "Ross");
         int[] points = {5,6,1};
         archer.registerScoreForRound(3, points);
-        assertEquals(12, archer.getTotalScore());
-        assertEquals(12+3, archer.getWeightedScore());
+        assertEquals(12, archer.getTotalScorePerRound());
+        assertEquals(12+3, archer.getTotalWeightedScore());
         archer.registerScoreForRound(1, points);
-        assertEquals(12*2, archer.getTotalScore());
-        assertEquals((12+3)*2, archer.getWeightedScore());
+        assertEquals(12*2, archer.getTotalScorePerRound());
+        assertEquals((12+3)*2, archer.getTotalWeightedScore());
     }
 
     @Test
-    public void checkRegisterScoreRound(){
+    public void checkRegisterScoreRoundThrow(){
         Archer archer = new Archer("Bob", "Ross");
         int[] points = {5,6,1};
         archer.registerScoreForRound(11,points);
     }
 
     @Test
-    public void checkRegisterScorePoints(){
+    public void checkRegisterScorePointsThrow(){
         Archer archer = new Archer("Bob", "Ross");
         int[] points = {5,6,1,3,1};
         archer.registerScoreForRound(8,points);
     }
+
+    //Weighted score test
 
 }

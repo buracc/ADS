@@ -28,9 +28,9 @@ public class ArcherComparator implements Comparator<Archer> {
      */
     @Override
     public int compare(Archer o1, Archer o2) {
-        int winner = o2.getTotalScore() - o1.getTotalScore();
+        int winner = o2.getTotalScorePerRound() - o1.getTotalScorePerRound();
         if (winner == 0) {
-            winner = o2.getWeightedScore() - o1.getWeightedScore();
+            winner = o2.getTotalWeightedScore() - o1.getTotalWeightedScore();
         }
 
         if (winner == 0) {

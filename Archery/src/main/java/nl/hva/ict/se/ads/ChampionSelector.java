@@ -79,18 +79,18 @@ public class ChampionSelector {
      */
     public static List<Archer> quickSort(List<Archer> archers, Comparator<Archer> scoringScheme) {
         Collections.shuffle(archers);
-        benis(archers, scoringScheme, 0, archers.size() - 1);
+        quickSort(archers, scoringScheme, 0, archers.size() - 1);
         return archers;
     }
 
-    private static void benis(List<Archer> archers, Comparator<Archer> scoringScheme, int low, int high) {
+    private static void quickSort(List<Archer> archers, Comparator<Archer> scoringScheme, int low, int high) {
         if (low >= high) {
             return;
         }
 
         int pivot = partition(archers, scoringScheme, low, high);
-        benis(archers, scoringScheme, low, pivot - 1);
-        benis(archers, scoringScheme, pivot + 1, high);
+        quickSort(archers, scoringScheme, low, pivot - 1);
+        quickSort(archers, scoringScheme, pivot + 1, high);
     }
 
     /**

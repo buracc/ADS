@@ -21,10 +21,10 @@ public class Archer {
     private final String lastName;
     private final int id; // Once assigned a value is not allowed to change.
 
-    private int[][] totalScore = new int[MAX_ROUNDS][MAX_ARROWS];
+    private int[][] totalScorePerRound = new int[MAX_ROUNDS][MAX_ARROWS];
 
-    private int total;
-    private int weightedScore;
+    private int totalScore;
+    private int totalWeightedScore;
     private int misses;
 
     /**
@@ -48,12 +48,12 @@ public class Archer {
         this.id = 1;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
     }
 
-    public void setWeightedScore(int weightedScore) {
-        this.weightedScore = weightedScore;
+    public void setTotalWeightedScore(int totalWeightedScore) {
+        this.totalWeightedScore = totalWeightedScore;
     }
 
     /**
@@ -64,33 +64,33 @@ public class Archer {
      * @param points the points shot during the round.
      */
     public void registerScoreForRound(int round, int[] points) throws IndexOutOfBoundsException {
-        if (round >= MAX_ROUNDS || points.length - 1 >= MAX_ARROWS) {
-            throw new IndexOutOfBoundsException("YOU'VE INSERT MORE THAN THE LIMIT!");
-        }
+//        if (round >= MAX_ROUNDS || points.length - 1 >= MAX_ARROWS) {
+//            throw new IndexOutOfBoundsException("YOU'VE INSERT MORE THAN THE LIMIT!");
+//        }
 
         for (int i = 0; i < points.length; i++) {
-            totalScore[round][i] = points[i];
-            total += totalScore[round][i];
+            totalScorePerRound[round][i] = points[i];
+            totalScore += totalScorePerRound[round][i];
 
-            if (totalScore[round][i] == 0) {
+            if (totalScorePerRound[round][i] == 0) {
                 misses++;
                 continue;
             }
 
-            weightedScore += totalScore[round][i] + 1;
+            totalWeightedScore += totalScorePerRound[round][i] + 1;
         }
 
-        weightedScore -= misses * 7;
+        totalWeightedScore -= misses * 7;
     }
 
     /**
-     * Returns the total score of the archer from all the 10 rounds
+     * Returns the totalScore score of the archer from all the 10 rounds
      *
-     * @return total score
+     * @return totalScore score
      */
 
-    public int getTotalScore() {
-        return total;
+    public int getTotalScorePerRound() {
+        return totalScore;
     }
 
     /**
@@ -175,12 +175,12 @@ public class Archer {
      *
      * @return weighted score
      */
-    public int getWeightedScore() {
-        return weightedScore;
+    public int getTotalWeightedScore() {
+        return totalWeightedScore;
     }
 
     @Override
     public String toString() {
-        return id + " (" + getTotalScore() + " / " + getWeightedScore() + ") " + firstName + " " + lastName;
+        return id + " (" + getTotalScorePerRound() + " / " + getTotalWeightedScore() + ") " + firstName + " " + lastName;
     }
 }
