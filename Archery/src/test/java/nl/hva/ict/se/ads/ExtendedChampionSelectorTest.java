@@ -24,12 +24,19 @@ public class ExtendedChampionSelectorTest extends ChampionSelectorTest {
     //Add a test that counts the time for execution
     @Test
     public void milisCounter(){
-        long startingTime = System.currentTimeMillis();
-        for (int numberOfArch = 100; numberOfArch < 5000000; numberOfArch *= 2){
+        long diff = 0;
+        //All sorts in 1 method, use the same list of Archers for each sort
+        for (int numberOfArch = 100; numberOfArch < 5_000_000 && diff <= 20000; numberOfArch *= 2){
             List<Archer> list = Archer.generateArchers(numberOfArch);
+
+            long startingTime = System.currentTimeMillis();
+
             ChampionSelector.quickSort(list, comparator);
+
             long endTime = System.currentTimeMillis();
-            System.out.println(numberOfArch + " : " + (endTime - startingTime));
+            diff = endTime - startingTime;
+
+            System.out.println(numberOfArch + " : " + diff);
         }
     }
 }
