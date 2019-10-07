@@ -151,13 +151,12 @@ public class Train implements Iterable<Wagon> {
      * @return Wagon found on the position.
      * @throws IndexOutOfBoundsException if Train has no Wagons.
      */
-    public Wagon getWagonOnPosition(int position) throws IndexOutOfBoundsException {
-        int counter = 1;
-        if (firstWagon == null || position > getNumberOfWagons()) {
+    public Wagon getWagonOnPosition(int position) {
+        if (firstWagon == null) {
             throw new IndexOutOfBoundsException("Position does not exist on train.");
         }
 
-        return wagonOnPosRecursive(firstWagon, position, counter);
+        return wagonOnPosRecursive(firstWagon, position);
     }
 
     /**
@@ -165,20 +164,19 @@ public class Train implements Iterable<Wagon> {
      *
      * @param wagon    current Wagon.
      * @param position position to look for.
-     * @param counter  index of current position.
      * @return Wagon on found position.
      * @throws IndexOutOfBoundsException if position does not exist.
      */
-    private Wagon wagonOnPosRecursive(Wagon wagon, int position, int counter) throws IndexOutOfBoundsException {
-        if (counter == position) {
+    private Wagon wagonOnPosRecursive(Wagon wagon, int position) throws IndexOutOfBoundsException {
+        if (position == 1) {
             return wagon;
         }
 
-        if (!wagon.hasNextWagon()) {
+        if (!wagon.hasNextWagon() || position > getNumberOfWagons()) {
             throw new IndexOutOfBoundsException("Position does not exist on train.");
         }
 
-        return wagonOnPosRecursive(wagon.getNextWagon(), position, ++counter);
+        return wagonOnPosRecursive(wagon.getNextWagon(), --position);
     }
 
     /**
