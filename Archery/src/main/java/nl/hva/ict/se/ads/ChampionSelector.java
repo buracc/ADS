@@ -29,34 +29,35 @@ public class ChampionSelector {
 
     /**
      * This method uses quick sort to sort the list of archers
-     * @param archers the list of archers
+     *
+     * @param archers       the list of archers
      * @param scoringScheme the comparator needed to compare the archers with each other
-     * @param first the first indeze in the list
-     * @param last the last index in the list
+     * @param first         the first indeze in the list
+     * @param last          the last index in the list
      * @return a list of quick sorted archers
      */
     private static int partition(List<Archer> archers, Comparator<Archer> scoringScheme, int first, int last) {
         int firstCounter = first;
-        int lastCounter = last+1;
+        int lastCounter = last + 1;
         int pivot = first;
 
         while (true) {
             while (scoringScheme.compare(archers.get(++firstCounter), archers.get(pivot)) < 0) {
-                if (firstCounter == last){
+                if (firstCounter == last) {
                     //All the archers are lesser than the pivot
                     break;
                 }
             }
 
             while (scoringScheme.compare(archers.get(pivot), archers.get(--lastCounter)) < 0) {
-                if (lastCounter == first){
+                if (lastCounter == first) {
                     //All the archers are greater than the pivot
                     break;
                 }
             }
 
             //If the counters cross, that means we've iterated through "all" the archers
-            if (firstCounter >= lastCounter){
+            if (firstCounter >= lastCounter) {
                 break;
             }
             //Swap archers.get(firstCounter) met archers.get(lastCounter)
@@ -82,13 +83,14 @@ public class ChampionSelector {
         return archers;
     }
 
-    private static void benis(List<Archer> archers, Comparator<Archer> scoringScheme, int low, int high){
-        if (low >= high){
+    private static void benis(List<Archer> archers, Comparator<Archer> scoringScheme, int low, int high) {
+        if (low >= high) {
             return;
         }
+
         int pivot = partition(archers, scoringScheme, low, high);
-        benis(archers, scoringScheme, low, pivot-1);
-        benis(archers, scoringScheme, pivot+1, high);
+        benis(archers, scoringScheme, low, pivot - 1);
+        benis(archers, scoringScheme, pivot + 1, high);
     }
 
     /**

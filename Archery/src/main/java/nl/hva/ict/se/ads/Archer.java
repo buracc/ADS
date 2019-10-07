@@ -42,7 +42,7 @@ public class Archer {
         this.id = id;
     }
 
-    public Archer(String firstName, String lastName){
+    public Archer(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.id = 1;
@@ -63,10 +63,11 @@ public class Archer {
      * @param round  the round for which to register the points.
      * @param points the points shot during the round.
      */
-    public void registerScoreForRound(int round, int[] points) {
-        if (round >= MAX_ROUNDS || points.length-1 >= MAX_ARROWS){
+    public void registerScoreForRound(int round, int[] points) throws IndexOutOfBoundsException {
+        if (round >= MAX_ROUNDS || points.length - 1 >= MAX_ARROWS) {
             throw new IndexOutOfBoundsException("YOU'VE INSERT MORE THAN THE LIMIT!");
         }
+
         for (int i = 0; i < points.length; i++) {
             totalScore[round][i] = points[i];
             total += totalScore[round][i];
@@ -84,6 +85,7 @@ public class Archer {
 
     /**
      * Returns the total score of the archer from all the 10 rounds
+     *
      * @return total score
      */
 
@@ -125,6 +127,7 @@ public class Archer {
 
     /**
      * Returns the id of the archer
+     *
      * @return id of archer
      */
     public int getId() {
@@ -133,7 +136,8 @@ public class Archer {
 
     /**
      * This method lets the archer shoot for all rounds and registers teh score
-     * @param archer the given archer
+     *
+     * @param archer     the given archer
      * @param isBeginner checks if the archer is a beginner
      */
     private static void letArcherShoot(Archer archer, boolean isBeginner) {
@@ -144,6 +148,7 @@ public class Archer {
 
     /**
      * This method registers the score for a single round, for 3 times (maximum arrows shot)
+     *
      * @param min minimum score registered
      * @return an array of 3 numbers which are the scores achieved that round
      */
@@ -157,6 +162,7 @@ public class Archer {
 
     /**
      * This method generates a random number depending if the archer is a beginner or not
+     *
      * @param min if the archer is a beginner the minimum is 0 else it's 1
      * @return returns a random number between min and 10
      */
@@ -166,6 +172,7 @@ public class Archer {
 
     /**
      * This method returns the weighted score of the archer
+     *
      * @return weighted score
      */
     public int getWeightedScore() {
