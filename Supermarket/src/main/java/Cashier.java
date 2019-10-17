@@ -70,11 +70,27 @@ public abstract class Cashier {
      */
     public void add(Customer customer) {
         // TODO add the customer to the queue of the cashier (if check-out is required)
-
+        if (customer.getCheckOutCashier() == this){
+            waitingQueue.add(customer);
+        }
     }
 
     // TODO implement relevant overrides and/or local classes to be able to
     //  print Cashiers and/or use them in sets, maps and/or priority queues.
+
+    @Override
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(name).append("\t");
+        stringBuilder.append(waitingQueue.size()).append("\t");
+        stringBuilder.append(/*avgWaitTime*/);
+        stringBuilder.append(/*maxWaitTime*/);
+        stringBuilder.append(maxQueueLength).append("\t");
+        stringBuilder.append(/*avgCheckoutTime*/);
+        stringBuilder.append(totalIdleTime).append("\t");
+
+        return stringBuilder.toString();
+    }
 
 
     public int getTotalIdleTime() {

@@ -24,6 +24,13 @@ public class Product {
     // TODO implement relevant overrides and/or local classes to be able to
     //  print Products and/or use them in sets, maps and/or priority queues.
 
+
+    @Override
+    public String  toString() {
+        return code + ":" + price +
+                "(" + description + ")";
+    }
+
     public String getCode() {
         return code;
     }

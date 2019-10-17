@@ -21,6 +21,7 @@ public class Customer {
         this.queuedAt = queuedAt;
         this.zipCode = zipCode;
         // TODO: initialize an empty set of purchased items
+        items = new HashSet<>();
     }
 
     /**
@@ -31,6 +32,9 @@ public class Customer {
         int numItems = 0;
 
         // TODO: Calculate the total number of items
+        for (Purchase item : items) {
+            numItems += item.getAmount();
+        }
 
         return numItems;
     }
@@ -39,6 +43,9 @@ public class Customer {
         double totalBill = 0.0;
 
         // TODO: Calculate the total cost of all items
+        for (Purchase item : items) {
+            totalBill += item.getProduct().getPrice();
+        }
 
         return totalBill;
     }
@@ -58,7 +65,16 @@ public class Customer {
             selectedCashier = cashiers.get(0);
         } else {
             selectedCashier = null;
-
+            int temp = Integer.MAX_VALUE;
+            for (Cashier c: cashiers) {
+                //Waiting time has to be calculated
+              int passThrough = c.expectedWaitingTime(this) + c.expectedCheckOutTime(items.size());
+              if (passThrough < temp){
+                  temp = passThrough;
+                  selectedCashier = c;
+              }
+            }
+            return selectedCashier;
             // TODO find the cashier with the lowest expected pass-through time.
             //  passthrough time = waiting time + time to check-out my own bought items
             //  waiting time = remaining time for the current customer +
@@ -70,6 +86,7 @@ public class Customer {
 
     // TODO implement relevant overrides and/or local classes to be able to
     //  print Customers and/or use them in sets, maps and/or priority queues.
+
 
     public LocalTime getQueuedAt() {
         return queuedAt;

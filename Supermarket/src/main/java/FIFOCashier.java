@@ -1,9 +1,11 @@
 import java.time.LocalTime;
+import java.util.ArrayDeque;
 
 public class FIFOCashier extends Cashier {
 
     protected FIFOCashier(String name) {
         super(name);
+        super.waitingQueue = new ArrayDeque<>();
     }
 
     @Override
