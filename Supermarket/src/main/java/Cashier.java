@@ -83,10 +83,10 @@ public abstract class Cashier {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(name).append("\t");
         stringBuilder.append(waitingQueue.size()).append("\t");
-        stringBuilder.append(/*avgWaitTime*/);
-        stringBuilder.append(/*maxWaitTime*/);
+//        stringBuilder.append(/*avgWaitTime*/);
+//        stringBuilder.append(/*maxWaitTime*/);
         stringBuilder.append(maxQueueLength).append("\t");
-        stringBuilder.append(/*avgCheckoutTime*/);
+//        stringBuilder.append(/*avgCheckoutTime*/);
         stringBuilder.append(totalIdleTime).append("\t");
 
         return stringBuilder.toString();

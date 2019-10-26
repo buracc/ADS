@@ -1,10 +1,13 @@
 /**
  * Supermarket Customer check-out and Cashier simulation
- * @author  hbo-ict@hva.nl
+ *
+ * @author hbo-ict@hva.nl
  */
+
 import utils.SLF4J;
 import utils.XMLParser;
 import utils.XMLWriter;
+
 import javax.xml.stream.XMLStreamConstants;
 import java.time.LocalTime;
 import java.util.*;
@@ -23,14 +26,16 @@ public class Supermarket {
         this.setOpenTime(openTime);
         this.setClosingTime(closingTime);
         this.cashiers = new ArrayList<>();
-        // TODO create empty data structures for products and customers
-
+        customers = new ArrayList<>();
+        products = new HashSet<>();
     }
 
     public int getTotalNumberOfItems() {
         int totalItems = 0;
 
-        // TODO: calculate the total number of shopped items
+        for (Customer c: customers) {
+            totalItems += c.getNumberOfItems();
+        }
 
         return totalItems;
     }
@@ -50,13 +55,21 @@ public class Supermarket {
         System.out.printf("%d customers have shopped %d items out of %d different products\n",
                 this.customers.size(), this.getTotalNumberOfItems(), this.products.size());
 
-        System.out.printf("Revenues and most bought product per zip-code:");
+        System.out.println("Revenues and most bought product per zip-code:");
         Map<String, Double> revenues = this.revenueByZipCode();
         Map<String, Product> populars = this.mostBoughtProductByZipCode();
+        for (Map.Entry<String, Product> entry : populars.entrySet()) {
+            String zip = entry.getKey();
+            Product product = entry.getValue();
+
+            System.out.println("---------------------\nzip: " + zip);
+            System.out.println("Most popular product: " + product);
+        }
 
         double totalRevenue = 0.0;
-        // TODO: display the calculated revenues and most bought products.
-        // TODO: calculate the total revenue.
+        for (Double d : revenues.values()) {
+            totalRevenue += d;
+        }
 
         System.out.printf("\nTotal Revenue=%.2f\n", totalRevenue);
     }
@@ -85,13 +98,15 @@ public class Supermarket {
 
     /**
      * calculates a map of aggregated revenues per zip code that is also ordered by zip code
+     *
      * @return
      */
     public Map<String, Double> revenueByZipCode() {
-        Map<String, Double> revenues = null;
+        Map<String, Double> revenues = new TreeMap<>();
 
-        // TODO create an appropriate data structure for the revenues
-        //  and calculate its contents
+        for (Customer c : customers) {
+            revenues.put(c.getZipCode(), c.calculateTotalBill() + revenues.getOrDefault(c.getZipCode(), 0.0));
+        }
 
         return revenues;
     }
@@ -100,13 +115,40 @@ public class Supermarket {
      * (DIFFICULT!!!)
      * calculates a map of most bought products per zip code that is also ordered by zip code
      * if multiple products have the same maximum count, just pick one.
+     *
      * @return
      */
     public Map<String, Product> mostBoughtProductByZipCode() {
-        Map<String, Product> mostBought = null;
+        Map<String, Product> mostBought = new TreeMap<>();
+        Map<String, Map<Product, Integer>> amountsPerZip = new TreeMap<>();
 
-        // TODO create an appropriate data structure for the mostBought
-        //  and calculate its contents
+        for (Customer c : customers) {
+            amountsPerZip.put(c.getZipCode(), new TreeMap<>());
+            Map<Product, Integer> productAmounts = amountsPerZip.get(c.getZipCode());
+
+            for (Purchase p : c.getItems()) {
+                productAmounts.put(p.getProduct(), p.getAmount());
+            }
+        }
+
+        for (Map.Entry<String, Map<Product, Integer>> entry : amountsPerZip.entrySet()) {
+            String zip = entry.getKey();
+            Map<Product, Integer> products = entry.getValue();
+
+            int mostAmount = 0;
+            Product bestProduct = null;
+            for (Map.Entry<Product, Integer> entry1 : products.entrySet()) {
+                Product p = entry1.getKey();
+                int amount = entry1.getValue();
+
+                if (mostAmount < amount) {
+                    mostAmount = amount;
+                    bestProduct = p;
+                }
+            }
+
+            mostBought.put(zip, bestProduct);
+        }
 
         return mostBought;
     }
@@ -147,12 +189,12 @@ public class Supermarket {
 
         // all customers have been handled;
         // cashiers finish their work until closing time + some overtime
-        final int overtime = 15*60;
+        final int overtime = 15 * 60;
         for (Cashier c : this.cashiers) {
             c.doTheWorkUntil(this.closingTime.plusSeconds(overtime));
             // remove the overtime from the current time and the idle time of the cashier
             c.setCurrentTime(c.getCurrentTime().minusSeconds(overtime));
-            c.setTotalIdleTime(c.getTotalIdleTime()-overtime);
+            c.setTotalIdleTime(c.getTotalIdleTime() - overtime);
         }
     }
 
@@ -186,7 +228,8 @@ public class Supermarket {
 
     /**
      * Loads a complete supermarket configuration from an XML file
-     * @param resourceName  the XML file name to be found in the resources folder
+     *
+     * @param resourceName the XML file name to be found in the resources folder
      * @return
      */
     public static Supermarket importFromXML(String resourceName) {
@@ -216,6 +259,7 @@ public class Supermarket {
     /**
      * Exports the supermarket configuration to an xml configuration file
      * that can be shared and read in by a main
+     *
      * @param resourceName
      */
     public void exportXML(String resourceName) {
@@ -258,13 +302,14 @@ public class Supermarket {
      * arrival times are chosen well in advance of closingTime of the supermarket,
      * such that cashiers can be expected to be able to finish all work
      * (unless an extreme workload has been configured)
+     *
      * @param nCustomers
      * @param averageNrItems
      */
     public void addRandomCustomers(int nCustomers, int averageNrItems) {
         if (!(this.products instanceof Collection) ||
                 !(this.customers instanceof Collection)
-        )   return;
+        ) return;
 
         // copy the product to an array for easy random selection
         Product[] prods = new Product[this.products.size()];
