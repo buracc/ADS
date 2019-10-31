@@ -26,8 +26,8 @@ public class Supermarket {
         this.setOpenTime(openTime);
         this.setClosingTime(closingTime);
         this.cashiers = new ArrayList<>();
-        customers = new ArrayList<>();
-        products = new HashSet<>();
+        this.customers = new ArrayList<>();
+        this.products = new HashSet<>();
     }
 
     public int getTotalNumberOfItems() {
