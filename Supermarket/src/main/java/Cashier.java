@@ -1,6 +1,7 @@
 /**
  * Supermarket Customer check-out and Cashier simulation
- * @author  hbo-ict@hva.nl
+ *
+ * @author hbo-ict@hva.nl
  */
 
 import java.time.LocalTime;
@@ -13,7 +14,7 @@ public abstract class Cashier {
     protected LocalTime currentTime;        // tracks time for the cashier during simulation
     protected int totalIdleTime;            // tracks cumulative seconds when there was no work for the cashier
     protected int maxQueueLength;           // tracks the maximum number of customers at the cashier at any time
-            // during simulation. Includes both waiting customers and the customer being served
+    // during simulation. Includes both waiting customers and the customer being served
 
     protected Cashier(String name) {
         this.name = name;
@@ -70,14 +71,11 @@ public abstract class Cashier {
      */
     public void add(Customer customer) {
         // TODO add the customer to the queue of the cashier (if check-out is required)
-            waitingQueue.add(customer);
+        waitingQueue.add(customer);
     }
 
-    // TODO implement relevant overrides and/or local classes to be able to
-    //  print Cashiers and/or use them in sets, maps and/or priority queues.
-
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(name).append("\t");
         stringBuilder.append(waitingQueue.size()).append("\t");
@@ -110,6 +108,7 @@ public abstract class Cashier {
     public void setCurrentTime(LocalTime currentTime) {
         this.currentTime = currentTime;
     }
+
     public void setTotalIdleTime(int totalIdleTime) {
         this.totalIdleTime = totalIdleTime;
     }

@@ -11,7 +11,7 @@ import javax.xml.stream.XMLStreamWriter;
 import java.time.LocalTime;
 import java.util.*;
 
-public class Customer implements Comparable<Customer> {
+public class Customer {
     private LocalTime queuedAt;      // time of arrival at cashier
     private String zipCode;          // zip-code of the customer
     private Set<Purchase> items;     // items procured by customer
@@ -63,28 +63,20 @@ public class Customer implements Comparable<Customer> {
         if (cashiers.size() == 1) {
             selectedCashier = cashiers.get(0);
         } else {
-            selectedCashier = null;
             int temp = Integer.MAX_VALUE;
             for (Cashier c : cashiers) {
-                //Waiting time has to be calculated
                 int passThrough = c.expectedWaitingTime(this) + c.expectedCheckOutTime(items.size());
                 if (passThrough < temp) {
                     temp = passThrough;
                     selectedCashier = c;
                 }
             }
-            return selectedCashier;
-            // TODO find the cashier with the lowest expected pass-through time.
-            //  passthrough time = waiting time + time to check-out my own bought items
-            //  waiting time = remaining time for the current customer +
-            //          check-out times of all other customers that will be in front of me in the cashier's queue
 
+            return selectedCashier;
         }
+
         return selectedCashier;
     }
-
-    // TODO implement relevant overrides and/or local classes to be able to
-    //  print Customers and/or use them in sets, maps and/or priority queues.
 
 
     public LocalTime getQueuedAt() {
@@ -196,12 +188,14 @@ public class Customer implements Comparable<Customer> {
     }
 
     @Override
-    public int compareTo(Customer o) {
-        if (getNumberOfItems() > o.getNumberOfItems()) {
-            return -1;
-        } else if (getNumberOfItems() == o.getNumberOfItems()){
-            return 0;
-        }
-        return 1;
+    public String toString() {
+        return "Customer{" +
+                "queuedAt=" + queuedAt +
+                ", zipCode='" + zipCode + '\'' +
+                ", items=" + items +
+                ", actualWaitingTime=" + actualWaitingTime +
+                ", actualCheckOutTime=" + actualCheckOutTime +
+                ", checkOutCashier=" + checkOutCashier +
+                '}';
     }
 }

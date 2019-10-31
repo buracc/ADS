@@ -1,67 +1,82 @@
 import java.time.LocalTime;
-import java.util.ArrayDeque;
 import java.util.LinkedList;
 
 public class FIFOCashier extends Cashier {
-    private int checkoutTimePerCustomer;
-    private int checkoutTimePerItem;
+    public static final int CUSTOMER_CHECKOUT_TIME = 20;
+    public static final int ITEM_CHECKOUT_TIME = 2;
 
-    private Customer current;
-    private int currentWaitingTime = 0;
+    private Customer currentCustomer;
+    private int currentWaitingTime;
 
     public FIFOCashier(String name) {
         super(name);
         super.waitingQueue = new LinkedList<>();
-        current = waitingQueue.peek();
+    }
+
+    @Override
+    public void reStart(LocalTime currentTime) {
+        super.reStart(currentTime);
+        this.currentCustomer = null;
+        this.currentWaitingTime = 0;
+    }
+
+    @Override
+    public void add(Customer customer) {
+        if (customer.getItems().size() == 0) {
+            return;
+        }
+
+        waitingQueue.add(customer);
+        customer.setCheckOutCashier(this);
+
+        if (waitingQueue.size() >= maxQueueLength) {
+            if (currentCustomer != null) {
+                maxQueueLength = waitingQueue.size() + 1;
+                return;
+            }
+
+            maxQueueLength = waitingQueue.size();
+        }
     }
 
     @Override
     public int expectedCheckOutTime(int numberOfItems) {
-        if (numberOfItems != 0){
-            return 20 + (numberOfItems*2);
+        if (numberOfItems != 0) {
+            return CUSTOMER_CHECKOUT_TIME + (numberOfItems * ITEM_CHECKOUT_TIME);
         }
+
         return 0;
     }
 
     @Override
     public int expectedWaitingTime(Customer customer) {
-        int benis = 0;
-        for (Customer c: waitingQueue) {
-            benis += expectedCheckOutTime(c.getNumberOfItems()) + c.getActualCheckOutTime();
+        int totalWaitingTime = 0;
+        for (Customer c : waitingQueue) {
+            totalWaitingTime += expectedCheckOutTime(c.getNumberOfItems()) + c.getActualCheckOutTime();
         }
-        benis += currentWaitingTime;
-        customer.setActualWaitingTime(benis);
-        return benis;
+
+        totalWaitingTime += currentWaitingTime;
+        customer.setActualWaitingTime(totalWaitingTime);
+        return totalWaitingTime;
     }
 
     @Override
     public void doTheWorkUntil(LocalTime targetTime) {
-        current = waitingQueue.peek();
-        int checkoutTimeCurrent = expectedCheckOutTime(current.getNumberOfItems());
-        waitingQueue.remove();
-        /*while(!super.currentTime.equals(targetTime)) {
-            for (Customer c : super.waitingQueue) {
-                super.setCurrentTime(super.getCurrentTime().plusSeconds(c.getActualCheckOutTime()));
-                super.waitingQueue.remove();
-                if (super.currentTime.equals(targetTime)){
-                    break;
-                }
-            }
-            super.setTotalIdleTime(++totalIdleTime);
-            super.setCurrentTime(super.getCurrentTime().plusSeconds(1));
-        }*/
-
-        while (!currentTime.equals(targetTime)){
-            if (checkoutTimeCurrent != 0){
-                setCurrentTime(currentTime.plusSeconds(1));
-                current.setActualCheckOutTime(--checkoutTimeCurrent);
-                currentWaitingTime = checkoutTimeCurrent;
-            }else{
+        while (!currentTime.equals(targetTime)) {
+            if (currentCustomer == null && waitingQueue.size() == 0) {
                 setTotalIdleTime(++totalIdleTime);
                 setCurrentTime(currentTime.plusSeconds(1));
+                continue;
             }
 
-        }
+            if (currentCustomer != null) {
+                currentCustomer.setActualCheckOutTime(--currentWaitingTime);
+                setCurrentTime(currentTime.plusSeconds(1));
+                continue;
+            }
 
+            currentCustomer = waitingQueue.remove();
+            currentWaitingTime = expectedCheckOutTime(currentCustomer.getNumberOfItems());
+        }
     }
 }

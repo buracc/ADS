@@ -26,8 +26,8 @@ public class Supermarket {
         this.setOpenTime(openTime);
         this.setClosingTime(closingTime);
         this.cashiers = new ArrayList<>();
-        customers = new ArrayList<>();
-        products = new HashSet<>();
+        this.customers = new ArrayList<>();
+        this.products = new HashSet<>();
     }
 
     public int getTotalNumberOfItems() {
@@ -157,10 +157,7 @@ public class Supermarket {
      * simulate the cashiers while handling all customers that enter their queues
      */
     public void simulateCashiers() {
-        Queue<Customer> shoppingQueue = null;
-
-        // TODO: create an appropriate data structure for the shoppingQueue
-        //  and add all customers in the supermarket
+        Queue<Customer> shoppingQueue = new LinkedList<>(customers);
 
         // all cashiers restart at open time
         for (Cashier c : this.cashiers) {
@@ -170,8 +167,7 @@ public class Supermarket {
         // poll the customers from the queue one by one
         // and redirect them to the cashier of their choice
 
-        // TODO: get the first customer from the shoppingQueue;
-        Customer nextCustomer = null;
+        Customer nextCustomer = shoppingQueue.peek();
 
         while (nextCustomer != null) {
 
@@ -183,8 +179,7 @@ public class Supermarket {
             Cashier selectedCashier = nextCustomer.selectCashier(this.cashiers);
             // redirect the customer to the selected cashier
             selectedCashier.add(nextCustomer);
-
-            // TODO: next customer is arriving, get the next customer from the shoppingQueue
+            nextCustomer = shoppingQueue.poll();
         }
 
         // all customers have been handled;
