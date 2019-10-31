@@ -3,7 +3,7 @@ import java.util.ArrayDeque;
 
 public class FIFOCashier extends Cashier {
 
-    public FIFOCashier(String name) {
+    protected FIFOCashier(String name) {
         super(name);
         super.waitingQueue = new ArrayDeque<>();
     }
