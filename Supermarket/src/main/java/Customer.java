@@ -1,15 +1,17 @@
 /**
  * Supermarket Customer check-out and Cashier simulation
- * @author  hbo-ict@hva.nl
+ *
+ * @author hbo-ict@hva.nl
  */
 
 import utils.XMLParser;
+
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 import java.time.LocalTime;
 import java.util.*;
 
-public class Customer {
+public class Customer implements Comparable<Customer> {
     private LocalTime queuedAt;      // time of arrival at cashier
     private String zipCode;          // zip-code of the customer
     private Set<Purchase> items;     // items procured by customer
@@ -63,13 +65,13 @@ public class Customer {
         } else {
             selectedCashier = null;
             int temp = Integer.MAX_VALUE;
-            for (Cashier c: cashiers) {
+            for (Cashier c : cashiers) {
                 //Waiting time has to be calculated
-              int passThrough = c.expectedWaitingTime(this) + c.expectedCheckOutTime(items.size());
-              if (passThrough < temp){
-                  temp = passThrough;
-                  selectedCashier = c;
-              }
+                int passThrough = c.expectedWaitingTime(this) + c.expectedCheckOutTime(items.size());
+                if (passThrough < temp) {
+                    temp = passThrough;
+                    selectedCashier = c;
+                }
             }
             return selectedCashier;
             // TODO find the cashier with the lowest expected pass-through time.
@@ -191,5 +193,15 @@ public class Customer {
             }
         }
         xmlWriter.writeEndElement();
+    }
+
+    @Override
+    public int compareTo(Customer o) {
+        if (getNumberOfItems() > o.getNumberOfItems()) {
+            return -1;
+        } else if (getNumberOfItems() == o.getNumberOfItems()){
+            return 0;
+        }
+        return 1;
     }
 }
