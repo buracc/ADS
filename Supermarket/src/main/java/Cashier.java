@@ -70,9 +70,7 @@ public abstract class Cashier {
      */
     public void add(Customer customer) {
         // TODO add the customer to the queue of the cashier (if check-out is required)
-        if (customer.getCheckOutCashier() == this){
             waitingQueue.add(customer);
-        }
     }
 
     // TODO implement relevant overrides and/or local classes to be able to
