@@ -17,10 +17,11 @@ public class PriorityCashier extends FIFOCashier {
         super(name);
         this.maxNumPriorityItems = maxNumPriorityItems;
         waitingQueue = new PriorityQueue<>((c1, c2) -> {
-            if (c1.getNumberOfItems() <= this.maxNumPriorityItems) {
-                if (c1.getNumberOfItems() < c2.getNumberOfItems() && c2.getNumberOfItems() > this.maxNumPriorityItems){
-                    return -1;
-                }
+            if (c1.getNumberOfItems() <= this.maxNumPriorityItems && c2.getNumberOfItems() > this.maxNumPriorityItems) {
+                return -1;
+            }
+            if (c1.getNumberOfItems() > this.maxNumPriorityItems && c2.getNumberOfItems() <= this.maxNumPriorityItems){
+                return 1;
             }
 
             return 0;
