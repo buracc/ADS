@@ -17,10 +17,16 @@ public class Supermarket {
     private Set<Product> products;      // a set of products that is being sold in the supermarket
     private List<Customer> customers;   // a list of customers that have visited the supermarket
     private List<Cashier> cashiers;     // the cashiers which have been configured to handle the customers
-
     private LocalTime openTime;         // start time of the simulation
     private LocalTime closingTime;      // end time of the simulation
 
+    /**
+     * Constructor for Supermarket, which consits of Cashiers, Customers and Products.
+     * Sets an opening time and a closing time for the Cashiers to work until
+     * @param name name of the Supermarket
+     * @param openTime opening time of the Supermarket
+     * @param closingTime closing time of the supermarket
+     */
     public Supermarket(String name, LocalTime openTime, LocalTime closingTime) {
         this.name = name;
         this.setOpenTime(openTime);
@@ -30,6 +36,10 @@ public class Supermarket {
         this.products = new HashSet<>();
     }
 
+    /**
+     * Calculates the total Products that have been purchased by the Customers
+     * @return total bought Products
+     */
     public int getTotalNumberOfItems() {
         int totalItems = 0;
 

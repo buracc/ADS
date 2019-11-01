@@ -10,15 +10,27 @@ public class SupermarketMain {
          Customer customer1 = new Customer(LocalTime.NOON.plusSeconds(10), "1213");
          Customer customer2 = new Customer(LocalTime.NOON.plusSeconds(30), "1111");
          Customer customer3 = new Customer(LocalTime.NOON.plusSeconds(20), "dded");
+         Customer customer4 = new Customer(LocalTime.NOON.plusSeconds(20), "dded");
+         Customer customer5 = new Customer(LocalTime.NOON.plusSeconds(20), "dded");
+         Customer customer6 = new Customer(LocalTime.NOON.plusSeconds(20), "dded");
+         Customer customer7 = new Customer(LocalTime.NOON.plusSeconds(20), "dded");
 
          customer1.getItems().add(new Purchase(prod1, 5));
          customer2.getItems().add(new Purchase(prod1, 1));
          customer3.getItems().add(new Purchase(prod1, 7));
+         customer4.getItems().add(new Purchase(prod1, 6));
+         customer5.getItems().add(new Purchase(prod1, 4));
+         customer6.getItems().add(new Purchase(prod1, 2));
+         customer7.getItems().add(new Purchase(prod1, 3));
 
         Cashier c = new PriorityCashier("benis",5);
         c.add(customer3);
         c.add(customer2);
         c.add(customer1);
+        c.add(customer4);
+        c.add(customer5);
+        c.add(customer6);
+        c.add(customer7);
 
         while (!c.waitingQueue.isEmpty()) {
             System.out.println(c.waitingQueue.poll().getNumberOfItems());

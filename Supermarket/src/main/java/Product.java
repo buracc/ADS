@@ -15,6 +15,12 @@ public class Product implements Comparable<Product> {
     private String description;     // the product description, useful for reporting
     private double price;           // the product's price
 
+    /**
+     * Constrcutor for Product consists of a product code, a description and a price
+     * @param code the product code
+     * @param description the description of the Product
+     * @param price the price of the Product
+     */
     public Product(String code, String description, double price) {
         this.code = code;
         this.description = description;
@@ -95,16 +101,31 @@ public class Product implements Comparable<Product> {
         xmlWriter.writeEndElement();
     }
 
+    /**
+     * Method thaat checks if this product code is equal to the given product code, depending on the hashCode
+     * @param o the given Product in the form of an Object
+     * @return true or false if the Products do equal with each other
+     */
     @Override
     public boolean equals(Object o){
         return this.getCode().equals(((Product) o).getCode());
     }
 
+    /**
+     * Returns the hashcode of the product code
+     * @return hashcode of the code of the Product
+     */
     @Override
     public int hashCode(){
         return this.getCode().hashCode();
     }
 
+    /**
+     * Compares the product codes with the given Product and returns a positive, negative or 0 as value,
+     * which determines the position of the Product in a list
+     * @param o the given Product
+     * @return positive, negative or 0 depending on which Product is greater
+     */
     @Override
     public int compareTo(Product o) {
         return this.getCode().compareTo(o.getCode());

@@ -19,6 +19,12 @@ public class Customer implements Comparable<Customer>{
     private int actualCheckOutTime;  // actual check-out time at cashier in seconds
     private Cashier checkOutCashier; // cashier that the customer has chosen for check-out
 
+    /**
+     * Constructor for Customer consists of a time that determines when the Customer got queued
+     * and a zip code of the Customer
+     * @param queuedAt the time this Customer got queued
+     * @param zipCode the zip code of this customer
+     */
     public Customer(LocalTime queuedAt, String zipCode) {
         this.queuedAt = queuedAt;
         this.zipCode = zipCode;
@@ -39,6 +45,10 @@ public class Customer implements Comparable<Customer>{
         return numItems;
     }
 
+    /**
+     * Calculate the total bill of this purchases of this Customer
+     * @return total bill
+     */
     public double calculateTotalBill() {
         double totalBill = 0.0;
 
@@ -199,6 +209,11 @@ public class Customer implements Comparable<Customer>{
                 '}';
     }
 
+    /**
+     * Compares the time when this Customer got queued with given Customer
+     * @param o given Customer
+     * @return positive, negative or 0 determining where this Customer should be placed
+     */
     @Override
     public int compareTo(Customer o) {
         return queuedAt.compareTo(o.queuedAt);

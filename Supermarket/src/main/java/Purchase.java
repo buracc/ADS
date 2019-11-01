@@ -16,6 +16,11 @@ public class Purchase {
     private Product product;        // the product that the customer has bought
     private int amount;             // the amount of items that the customer has bought of the given product
 
+    /**
+     * Constructor for Purchase consisting of a Product and an amount of the chosen Product
+     * @param p the chosen Product
+     * @param n the amount of the chosen Product
+     */
     public Purchase(Product p, int n) {
         this.product = p;
         this.amount = n;
