@@ -11,7 +11,7 @@ import javax.xml.stream.XMLStreamWriter;
 import java.time.LocalTime;
 import java.util.*;
 
-public class Customer {
+public class Customer implements Comparable<Customer>{
     private LocalTime queuedAt;      // time of arrival at cashier
     private String zipCode;          // zip-code of the customer
     private Set<Purchase> items;     // items procured by customer
@@ -65,7 +65,7 @@ public class Customer {
         } else {
             int temp = Integer.MAX_VALUE;
             for (Cashier c : cashiers) {
-                int passThrough = c.expectedWaitingTime(this) + c.expectedCheckOutTime(items.size());
+                int passThrough = c.expectedWaitingTime(this);
                 if (passThrough < temp) {
                     temp = passThrough;
                     selectedCashier = c;
@@ -197,5 +197,10 @@ public class Customer {
                 ", actualCheckOutTime=" + actualCheckOutTime +
                 ", checkOutCashier=" + checkOutCashier +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Customer o) {
+        return queuedAt.compareTo(o.queuedAt);
     }
 }

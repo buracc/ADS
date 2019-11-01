@@ -167,7 +167,7 @@ public class Supermarket {
         // poll the customers from the queue one by one
         // and redirect them to the cashier of their choice
 
-        Customer nextCustomer = shoppingQueue.peek();
+        Customer nextCustomer = shoppingQueue.poll();
 
         while (nextCustomer != null) {
 

@@ -8,6 +8,10 @@ public class FIFOCashier extends Cashier {
     private Customer currentCustomer;
     private int currentWaitingTime;
 
+    public int getCurrentWaitingTime() {
+        return currentWaitingTime;
+    }
+
     public FIFOCashier(String name) {
         super(name);
         super.waitingQueue = new LinkedList<>();
@@ -52,7 +56,7 @@ public class FIFOCashier extends Cashier {
     public int expectedWaitingTime(Customer customer) {
         int totalWaitingTime = 0;
         for (Customer c : waitingQueue) {
-            totalWaitingTime += expectedCheckOutTime(c.getNumberOfItems()) + c.getActualCheckOutTime();
+            totalWaitingTime += expectedCheckOutTime(c.getNumberOfItems());
         }
 
         totalWaitingTime += currentWaitingTime;

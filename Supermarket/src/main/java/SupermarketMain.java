@@ -1,7 +1,29 @@
+import java.time.LocalTime;
+
 public class SupermarketMain {
     public static void main(String[] args) {
 
-        // load the simulation configuration with open and closing times
+         Product prod1 = new Product("A001", "Any-1", 1.0);
+         Product prod2 = new Product("A002", "Any-2", 2.0);
+         Product prod3 = new Product("A003", "Any-3", 3.0);
+
+         Customer customer1 = new Customer(LocalTime.NOON.plusSeconds(10), "1213");
+         Customer customer2 = new Customer(LocalTime.NOON.plusSeconds(30), "1111");
+         Customer customer3 = new Customer(LocalTime.NOON.plusSeconds(20), "dded");
+
+         customer1.getItems().add(new Purchase(prod1, 5));
+         customer2.getItems().add(new Purchase(prod1, 1));
+         customer3.getItems().add(new Purchase(prod1, 7));
+
+        Cashier c = new PriorityCashier("benis",5);
+        c.add(customer3);
+        c.add(customer2);
+        c.add(customer1);
+
+        while (!c.waitingQueue.isEmpty()) {
+            System.out.println(c.waitingQueue.poll().getNumberOfItems());
+        }
+        /*// load the simulation configuration with open and closing times
         // and products and customers
         Supermarket supermarket =
                 Supermarket.importFromXML("jambi250_8.xml");
@@ -36,6 +58,6 @@ public class SupermarketMain {
 
         // simulate the configuration and print the result
         supermarket.simulateCashiers();
-        supermarket.printSimulationResults();
+        supermarket.printSimulationResults();*/
     }
 }
