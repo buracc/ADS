@@ -16,6 +16,8 @@ public abstract class Cashier {
     protected int maxQueueLength;           // tracks the maximum number of customers at the cashier at any time
     // during simulation. Includes both waiting customers and the customer being served
 
+    protected int finishedCustomers;
+
     /**
      * Constructor for Cashier containing the name of the Cashier
      * @param name name of the Cashier
@@ -123,6 +125,14 @@ public abstract class Cashier {
 
     public Queue<Customer> getWaitingQueue() {
         return waitingQueue;
+    }
+
+    public void finishedCustomer(){
+        this.finishedCustomers++;
+    }
+
+    public int getFinishedCustomers(){
+        return finishedCustomers;
     }
 
 }
