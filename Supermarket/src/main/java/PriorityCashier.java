@@ -8,7 +8,7 @@ public class PriorityCashier extends FIFOCashier {
 
     /**
      * Constructor for Cashier with PriorityQueue data structure.
-     * Given in the waiting queue is tha Comparator, which the queue uses to sort the Customers with a higher priority
+     * Given in the waiting queue is the Comparator, which the queue uses to sort the Customers with a higher priority
      * at the beginning of the queue
      * @param name name of the Cashier
      * @param maxNumPriorityItems the number of items a Customer "gains" priority on
@@ -16,16 +16,7 @@ public class PriorityCashier extends FIFOCashier {
     public PriorityCashier(String name, int maxNumPriorityItems) {
         super(name);
         this.maxNumPriorityItems = maxNumPriorityItems;
-        waitingQueue = new PriorityQueue<>((c1, c2) -> {
-            if (c1.getNumberOfItems() <= this.maxNumPriorityItems && c2.getNumberOfItems() > this.maxNumPriorityItems) {
-                return -1;
-            }
-            if (c1.getNumberOfItems() > this.maxNumPriorityItems && c2.getNumberOfItems() <= this.maxNumPriorityItems){
-                return 1;
-            }
-
-            return 0;
-        });
+        waitingQueue = new PriorityQueue<>(Customer::compareTo);
     }
 
     @Override
@@ -64,7 +55,6 @@ public class PriorityCashier extends FIFOCashier {
 
         totalWaitingTime += getCurrentWaitingTime();
         customer.setActualWaitingTime(totalWaitingTime);
-        System.out.println(waitingQueue);
         return totalWaitingTime;
     }
 

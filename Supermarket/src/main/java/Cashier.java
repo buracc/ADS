@@ -75,7 +75,12 @@ public abstract class Cashier {
      */
     public void add(Customer customer) {
         // TODO add the customer to the queue of the cashier (if check-out is required)
+        if (customer.getItems().size() == 0) {
+            return;
+        }
+
         waitingQueue.add(customer);
+        customer.setCheckOutCashier(this);
     }
 
     @Override

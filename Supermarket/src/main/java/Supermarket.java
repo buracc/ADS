@@ -157,7 +157,9 @@ public class Supermarket {
                 }
             }
 
-            mostBought.put(zip, bestProduct);
+            if (bestProduct != null) {
+                mostBought.put(zip, bestProduct);
+            }
         }
 
         return mostBought;
@@ -167,7 +169,7 @@ public class Supermarket {
      * simulate the cashiers while handling all customers that enter their queues
      */
     public void simulateCashiers() {
-        Queue<Customer> shoppingQueue = new LinkedList<>(customers);
+        Queue<Customer> shoppingQueue = new PriorityQueue<>(customers);
 
         // all cashiers restart at open time
         for (Cashier c : this.cashiers) {
@@ -187,8 +189,11 @@ public class Supermarket {
             }
             // ask the customer about his preferred cashier for the check-out
             Cashier selectedCashier = nextCustomer.selectCashier(this.cashiers);
+
             // redirect the customer to the selected cashier
             selectedCashier.add(nextCustomer);
+
+
             nextCustomer = shoppingQueue.poll();
         }
 
