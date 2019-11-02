@@ -90,6 +90,35 @@ public class Supermarket {
     public void printSimulationResults() {
         System.out.printf("\nSimulation scenario results:\n");
         System.out.printf("Cashiers:     n-customers:  avg-wait-time: max-wait-time: max-queue-length: avg-check-out-time: idle-time:\n");
+
+        for (Cashier c: cashiers) {
+            double avgWaitTime = 0.0;
+            double maxWaitTime = 0.0;
+            double avgCheckOutTime = 0.0;
+
+            for (Customer cust: customers) {
+                avgWaitTime += cust.getActualWaitingTime();
+                avgCheckOutTime += cust.getActualCheckOutTime();
+
+                if (cust.getActualWaitingTime() > maxWaitTime){
+                    maxWaitTime = cust.getActualWaitingTime();
+                }
+            }
+
+            avgWaitTime /= c.getFinishedCustomers();
+            avgCheckOutTime /= c.getFinishedCustomers();
+
+            System.out.println(
+                    c.getName() + "\t\t\t" +
+                            c.getFinishedCustomers() + "\t\t\t\t" +
+                            avgWaitTime + "\t\t\t\t" +
+                            maxWaitTime + "\t\t\t\t" +
+                            c.getMaxQueueLength() + "\t\t\t\t" +
+                            avgCheckOutTime + "\t\t\t\t" +
+                            c.getTotalIdleTime() + "\t\t\t\t"
+
+            );
+        }
         // TODO: report simulation results per cashier:
         //  a) number of customers
         //  b) average waiting time per customer

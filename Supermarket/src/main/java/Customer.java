@@ -139,6 +139,7 @@ public class Customer implements Comparable<Customer>{
         this.actualCheckOutTime = actualCheckOutTime;
     }
 
+
     /**
      * read a series of customers with their purchases from the xml stream
      * and add them to the provided customers list
