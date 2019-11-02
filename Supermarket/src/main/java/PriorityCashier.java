@@ -4,6 +4,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class PriorityCashier extends FIFOCashier {
+
     private int maxNumPriorityItems;
 
     /**
@@ -16,7 +17,9 @@ public class PriorityCashier extends FIFOCashier {
     public PriorityCashier(String name, int maxNumPriorityItems) {
         super(name);
         this.maxNumPriorityItems = maxNumPriorityItems;
-        waitingQueue = new PriorityQueue<>(Customer::compareTo);
+        super.waitingQueue = new PriorityQueue<>((c1, c2) -> {
+            return c1.compareTo(c2);
+        });
     }
 
     @Override
@@ -42,14 +45,14 @@ public class PriorityCashier extends FIFOCashier {
      */
     @Override
     public int expectedWaitingTime(Customer customer) {
-
         int totalWaitingTime = 0;
-        for (Customer c : waitingQueue) {
-            if (customer.getNumberOfItems() <= 5){
-                if (c.getNumberOfItems() > 5){
+        for (Customer c : super.waitingQueue) {
+            if (customer.getNumberOfItems() <= maxNumPriorityItems){
+                if (c.getNumberOfItems() > maxNumPriorityItems){
                     break;
                 }
             }
+
             totalWaitingTime += expectedCheckOutTime(c.getNumberOfItems());
         }
 

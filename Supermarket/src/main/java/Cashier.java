@@ -74,7 +74,6 @@ public abstract class Cashier {
      * @param customer
      */
     public void add(Customer customer) {
-        // TODO add the customer to the queue of the cashier (if check-out is required)
         if (customer.getItems().size() == 0) {
             return;
         }

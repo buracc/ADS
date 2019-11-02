@@ -8,6 +8,7 @@ import utils.XMLParser;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
+import java.time.Duration;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -19,6 +20,8 @@ public class Customer implements Comparable<Customer>{
     private int actualCheckOutTime;  // actual check-out time at cashier in seconds
     private Cashier checkOutCashier; // cashier that the customer has chosen for check-out
 
+    private int id;
+
     /**
      * Constructor for Customer consists of a time that determines when the Customer got queued
      * and a zip code of the Customer
@@ -29,6 +32,17 @@ public class Customer implements Comparable<Customer>{
         this.queuedAt = queuedAt;
         this.zipCode = zipCode;
         items = new HashSet<>();
+    }
+
+    public Customer(int id, LocalTime queuedAt, String zipCode) {
+        this.id = id;
+        this.queuedAt = queuedAt;
+        this.zipCode = zipCode;
+        items = new HashSet<>();
+    }
+
+    public int getId() {
+        return id;
     }
 
     /**
@@ -216,6 +230,6 @@ public class Customer implements Comparable<Customer>{
      */
     @Override
     public int compareTo(Customer o) {
-        return queuedAt.compareTo(o.queuedAt);
+        return (int) Duration.between(getQueuedAt(), o.getQueuedAt()).toSeconds();
     }
 }

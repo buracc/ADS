@@ -1,34 +1,18 @@
 import java.time.LocalTime;
+import java.util.Iterator;
 
 public class SupermarketMain {
     public static void main(String[] args) {
 
          Product prod1 = new Product("A001", "Any-1", 1.0);
-         Product prod2 = new Product("A002", "Any-2", 2.0);
-         Product prod3 = new Product("A003", "Any-3", 3.0);
-         // 1 (5),
-        // 5 (4),
-        // 6 (2),
-        // 7 (3),
-        // 4 (6),
-        // 3 (7),
-        // 2 (1)
 
-         Customer customer1 = new Customer(LocalTime.NOON.plusSeconds(10), "1213");
-         Customer customer2 = new Customer(LocalTime.NOON.plusSeconds(30), "1111");
-         Customer customer3 = new Customer(LocalTime.NOON.plusSeconds(20), "dded");
-         Customer customer4 = new Customer(LocalTime.NOON.plusSeconds(20), "dded");
-         Customer customer5 = new Customer(LocalTime.NOON.plusSeconds(20), "dded");
-         Customer customer6 = new Customer(LocalTime.NOON.plusSeconds(20), "dded");
-         Customer customer7 = new Customer(LocalTime.NOON.plusSeconds(20), "dded");
-
-//        Customer customer1 = new Customer(LocalTime.NOON, "1213");
-//        Customer customer2 = new Customer(LocalTime.NOON, "1111");
-//        Customer customer3 = new Customer(LocalTime.NOON, "dded");
-//        Customer customer4 = new Customer(LocalTime.NOON, "dded");
-//        Customer customer5 = new Customer(LocalTime.NOON, "dded");
-//        Customer customer6 = new Customer(LocalTime.NOON, "dded");
-//        Customer customer7 = new Customer(LocalTime.NOON, "dded");
+        Customer customer1 = new Customer(1, LocalTime.NOON, "1213");
+        Customer customer2 = new Customer(2, LocalTime.NOON, "1111");
+        Customer customer3 = new Customer(3, LocalTime.NOON.plusSeconds(8), "dded");
+        Customer customer4 = new Customer(4, LocalTime.NOON.plusSeconds(5), "dded");
+        Customer customer5 = new Customer(5, LocalTime.NOON.plusSeconds(1), "dded");
+        Customer customer6 = new Customer(6, LocalTime.NOON, "dded");
+        Customer customer7 = new Customer(7, LocalTime.NOON, "dded");
 
          customer1.getItems().add(new Purchase(prod1, 5));
          customer2.getItems().add(new Purchase(prod1, 1));
@@ -38,17 +22,17 @@ public class SupermarketMain {
          customer6.getItems().add(new Purchase(prod1, 2));
          customer7.getItems().add(new Purchase(prod1, 3));
 
-        Cashier c = new PriorityCashier("benis",5);
-        c.add(customer1);
-        c.add(customer2);
-        c.add(customer3);
-        c.add(customer4);
-        c.add(customer5);
-        c.add(customer6);
-        c.add(customer7);
+        Cashier c = new PriorityCashier("prio",5);
+        print(customer1, c);
+        print(customer2, c);
+        print(customer3, c);
+        print(customer4, c);
+        print(customer5, c);
+        print(customer6, c);
+        print(customer7, c);
 
         while (!c.waitingQueue.isEmpty()) {
-            System.out.println(c.waitingQueue.poll().getNumberOfItems());
+            System.out.println(c.waitingQueue.poll().getId());
         }
 
 //        // load the simulation configuration with open and closing times
@@ -84,5 +68,15 @@ public class SupermarketMain {
 //        // simulate the configuration and print the result
 //        supermarket.simulateCashiers();
 //        supermarket.printSimulationResults();
+    }
+
+    private static void print(Customer customer7, Cashier c) {
+        c.add(customer7);
+        Iterator<Customer> it = c.waitingQueue.iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next());
+            System.out.println(it.next().getId() + " items: " + it.next().getNumberOfItems() + " queued at: " + it.next().getQueuedAt());
+        }
+        System.out.println("----------");
     }
 }

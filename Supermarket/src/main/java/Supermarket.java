@@ -88,7 +88,6 @@ public class Supermarket {
      * reports results of the cashier simulation
      */
     public void printSimulationResults() {
-
         System.out.printf("\nSimulation scenario results:\n");
         System.out.printf("Cashiers:     n-customers:  avg-wait-time: max-wait-time: max-queue-length: avg-check-out-time: idle-time:\n");
         // TODO: report simulation results per cashier:
