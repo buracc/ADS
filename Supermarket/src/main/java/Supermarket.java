@@ -23,8 +23,9 @@ public class Supermarket {
     /**
      * Constructor for Supermarket, which consits of Cashiers, Customers and Products.
      * Sets an opening time and a closing time for the Cashiers to work until
-     * @param name name of the Supermarket
-     * @param openTime opening time of the Supermarket
+     *
+     * @param name        name of the Supermarket
+     * @param openTime    opening time of the Supermarket
      * @param closingTime closing time of the supermarket
      */
     public Supermarket(String name, LocalTime openTime, LocalTime closingTime) {
@@ -38,12 +39,13 @@ public class Supermarket {
 
     /**
      * Calculates the total Products that have been purchased by the Customers
+     *
      * @return total bought Products
      */
     public int getTotalNumberOfItems() {
         int totalItems = 0;
 
-        for (Customer c: customers) {
+        for (Customer c : customers) {
             totalItems += c.getNumberOfItems();
         }
 
@@ -91,16 +93,23 @@ public class Supermarket {
         System.out.printf("\nSimulation scenario results:\n");
         System.out.printf("Cashiers:     n-customers:  avg-wait-time: max-wait-time: max-queue-length: avg-check-out-time: idle-time:\n");
 
-        for (Cashier c: cashiers) {
+        int overallCustomers = 0;
+        double overallAvgWait = 0.0;
+        double overallMaxWait = 0.0;
+        int overallMaxLength = 0;
+        double overallAvgCheckout = 0.0;
+        int overallIdle = 0;
+
+        for (Cashier c : cashiers) {
             double avgWaitTime = 0.0;
             double maxWaitTime = 0.0;
             double avgCheckOutTime = 0.0;
 
-            for (Customer cust: customers) {
+            for (Customer cust : customers) {
                 avgWaitTime += cust.getActualWaitingTime();
                 avgCheckOutTime += cust.getActualCheckOutTime();
 
-                if (cust.getActualWaitingTime() > maxWaitTime){
+                if (cust.getActualWaitingTime() > maxWaitTime) {
                     maxWaitTime = cust.getActualWaitingTime();
                 }
             }
@@ -108,17 +117,33 @@ public class Supermarket {
             avgWaitTime /= c.getFinishedCustomers();
             avgCheckOutTime /= c.getFinishedCustomers();
 
-            System.out.println(
-                    c.getName() + "\t\t\t" +
-                            c.getFinishedCustomers() + "\t\t\t\t" +
-                            avgWaitTime + "\t\t\t\t" +
-                            maxWaitTime + "\t\t\t\t" +
-                            c.getMaxQueueLength() + "\t\t\t\t" +
-                            avgCheckOutTime + "\t\t\t\t" +
-                            c.getTotalIdleTime() + "\t\t\t\t"
+            overallCustomers = customers.size();
+            overallAvgWait += avgWaitTime / cashiers.size();
+            overallMaxWait += maxWaitTime / cashiers.size();
+            overallMaxLength += c.getMaxQueueLength() / cashiers.size();
+            overallAvgCheckout += avgCheckOutTime / cashiers.size();
+            overallIdle += c.getTotalIdleTime();
 
-            );
+            System.out.printf("%-15s %-11d %-14.2f %-15.0f %-19d %-19.2f %-15d\n",
+                    c.getName(),
+                    c.getFinishedCustomers(),
+                    avgWaitTime,
+                    maxWaitTime,
+                    c.getMaxQueueLength(),
+                    avgCheckOutTime,
+                    c.getTotalIdleTime());
+
+
         }
+
+        System.out.printf("%-15s %-11d %-14.2f %-15.0f %-19d %-19.2f %-15d\n",
+                "overall",
+                overallCustomers,
+                overallAvgWait,
+                overallMaxWait,
+                overallMaxLength,
+                overallAvgCheckout,
+                overallIdle);
         // TODO: report simulation results per cashier:
         //  a) number of customers
         //  b) average waiting time per customer
@@ -221,7 +246,6 @@ public class Supermarket {
             // redirect the customer to the selected cashier
             selectedCashier.add(nextCustomer);
 
-
             nextCustomer = shoppingQueue.poll();
         }
 
@@ -230,6 +254,7 @@ public class Supermarket {
         final int overtime = 15 * 60;
         for (Cashier c : this.cashiers) {
             c.doTheWorkUntil(this.closingTime.plusSeconds(overtime));
+
             // remove the overtime from the current time and the idle time of the cashier
             c.setCurrentTime(c.getCurrentTime().minusSeconds(overtime));
             c.setTotalIdleTime(c.getTotalIdleTime() - overtime);

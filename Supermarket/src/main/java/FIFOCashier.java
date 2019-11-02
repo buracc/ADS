@@ -110,17 +110,19 @@ public class FIFOCashier extends Cashier {
             }
 
             if (currentCustomer != null) {
-                currentCustomer.setActualCheckOutTime(--currentWaitingTime);
+                --currentWaitingTime;
                 setCurrentTime(currentTime.plusSeconds(1));
 
                 if (currentWaitingTime == 0) {
+                    currentCustomer.setActualWaitingTime(expectedWaitingTime(currentCustomer));
+                    currentCustomer.setActualCheckOutTime(expectedCheckOutTime(currentCustomer.getNumberOfItems()));
                     currentCustomer = null;
+                    finishedCustomer();
                 }
 
                 continue;
             }
-            super.finishedCustomer();
-            currentCustomer.setActualCheckOutTime(expectedCheckOutTime(currentCustomer.getNumberOfItems()));
+
             currentCustomer = waitingQueue.poll();
             currentWaitingTime = expectedCheckOutTime(currentCustomer.getNumberOfItems());
         }
