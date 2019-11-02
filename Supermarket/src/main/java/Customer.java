@@ -230,6 +230,6 @@ public class Customer implements Comparable<Customer>{
      */
     @Override
     public int compareTo(Customer o) {
-        return (int) Duration.between(getQueuedAt(), o.getQueuedAt()).toSeconds();
+        return getQueuedAt().compareTo(o.getQueuedAt());
     }
 }
