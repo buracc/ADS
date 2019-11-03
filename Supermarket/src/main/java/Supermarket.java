@@ -74,8 +74,14 @@ public class Supermarket {
             String zip = entry.getKey();
             Product product = entry.getValue();
 
-            System.out.println("---------------------\nzip: " + zip);
-            System.out.println("Most popular product: " + product);
+            System.out.print(zip + ": ");
+            for (Map.Entry<String, Double> revenue : revenues.entrySet()) {
+                if (revenue.getKey().equals(zip)) {
+                    System.out.printf("%.2f", revenue.getValue());
+                }
+            }
+
+            System.out.print(" (" + product + "), \n");
         }
 
         double totalRevenue = 0.0;
