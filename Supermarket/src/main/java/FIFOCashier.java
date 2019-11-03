@@ -1,3 +1,4 @@
+import java.time.Duration;
 import java.time.LocalTime;
 import java.util.LinkedList;
 
@@ -45,9 +46,8 @@ public class FIFOCashier extends Cashier {
             return;
         }
 
-        customer.setActualWaitingTime(expectedWaitingTime(customer));
-        customer.setActualCheckOutTime(expectedCheckOutTime(customer.getNumberOfItems()));
         waitingQueue.add(customer);
+        customer.setActualCheckOutTime(expectedCheckOutTime(customer.getNumberOfItems()));
         customer.setCheckOutCashier(this);
 
         if (waitingQueue.size() >= maxQueueLength) {
@@ -86,15 +86,15 @@ public class FIFOCashier extends Cashier {
      */
     @Override
     public int expectedWaitingTime(Customer customer) {
-        int totalWaitingTime = 0;
+        int totalWaitingTime = getCurrentWaitingTime();
         for (Customer c : waitingQueue) {
             if (c == customer){
                 break;
             }
+
             totalWaitingTime += expectedCheckOutTime(c.getNumberOfItems());
         }
 
-        totalWaitingTime += currentWaitingTime;
         return totalWaitingTime;
     }
 
@@ -124,7 +124,9 @@ public class FIFOCashier extends Cashier {
 
                 continue;
             }
+
             currentCustomer = waitingQueue.poll();
+            currentCustomer.setActualWaitingTime((int) Duration.between(currentCustomer.getQueuedAt(), currentTime).toSeconds());
             //Current customer ALWAYS has a 0 waiting time
             currentWaitingTime = expectedCheckOutTime(currentCustomer.getNumberOfItems());
         }
