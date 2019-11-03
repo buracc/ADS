@@ -126,7 +126,9 @@ public class Supermarket {
             overallCustomers = customers.size();
             overallAvgWait += avgWaitTime / cashiers.size();
             overallMaxWait += maxWaitTime / cashiers.size();
-            overallMaxLength += c.getMaxQueueLength() / cashiers.size();
+            if (c.getMaxQueueLength() >= overallMaxLength) {
+                overallMaxLength = c.getMaxQueueLength();
+            }
             overallAvgCheckout += avgCheckOutTime / cashiers.size();
             overallIdle += c.getTotalIdleTime();
 
@@ -138,8 +140,6 @@ public class Supermarket {
                     c.getMaxQueueLength(),
                     avgCheckOutTime,
                     c.getTotalIdleTime());
-
-
         }
 
         System.out.printf("%-15s %-11d %-14.1f %-15.0f %-19d %-19.1f %-15d\n",
@@ -150,19 +150,6 @@ public class Supermarket {
                 overallMaxLength,
                 overallAvgCheckout,
                 overallIdle);
-        // TODO: report simulation results per cashier:
-        //  a) number of customers
-        //  b) average waiting time per customer
-        //  c) maximum waiting time by any customer at the given cashier
-        //  d) maximum queue length of waiting customers including the customer being served
-        //  e) average check-out time of customers at the given cashier
-        //  f) total idle time of the cashier
-        //     (a self-service area is idle already if at least one terminal is idle)
-
-
-        // TODO: report the same overall simulation results across all cashiers
-        //  as customer weighted averages or sums of totals.
-
     }
 
     /**
