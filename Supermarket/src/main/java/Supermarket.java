@@ -124,7 +124,7 @@ public class Supermarket {
             overallAvgCheckout += avgCheckOutTime / cashiers.size();
             overallIdle += c.getTotalIdleTime();
 
-            System.out.printf("%-15s %-11d %-14.2f %-15.0f %-19d %-19.2f %-15d\n",
+            System.out.printf("%-15s %-11d %-14.1f %-15.0f %-19d %-19.1f %-15d\n",
                     c.getName(),
                     c.getFinishedCustomers(),
                     avgWaitTime,
@@ -136,7 +136,7 @@ public class Supermarket {
 
         }
 
-        System.out.printf("%-15s %-11d %-14.2f %-15.0f %-19d %-19.2f %-15d\n",
+        System.out.printf("%-15s %-11d %-14.1f %-15.0f %-19d %-19.1f %-15d\n",
                 "overall",
                 overallCustomers,
                 overallAvgWait,

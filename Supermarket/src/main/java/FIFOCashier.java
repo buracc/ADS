@@ -45,6 +45,8 @@ public class FIFOCashier extends Cashier {
             return;
         }
 
+        customer.setActualWaitingTime(expectedWaitingTime(customer));
+        customer.setActualCheckOutTime(expectedCheckOutTime(customer.getNumberOfItems()));
         waitingQueue.add(customer);
         customer.setCheckOutCashier(this);
 
@@ -86,11 +88,13 @@ public class FIFOCashier extends Cashier {
     public int expectedWaitingTime(Customer customer) {
         int totalWaitingTime = 0;
         for (Customer c : waitingQueue) {
+            if (c == customer){
+                break;
+            }
             totalWaitingTime += expectedCheckOutTime(c.getNumberOfItems());
         }
 
         totalWaitingTime += currentWaitingTime;
-        customer.setActualWaitingTime(totalWaitingTime);
         return totalWaitingTime;
     }
 
@@ -114,16 +118,14 @@ public class FIFOCashier extends Cashier {
                 setCurrentTime(currentTime.plusSeconds(1));
 
                 if (currentWaitingTime == 0) {
-                    currentCustomer.setActualWaitingTime(expectedWaitingTime(currentCustomer));
-                    currentCustomer.setActualCheckOutTime(expectedCheckOutTime(currentCustomer.getNumberOfItems()));
                     currentCustomer = null;
                     finishedCustomer();
                 }
 
                 continue;
             }
-
             currentCustomer = waitingQueue.poll();
+            //Current customer ALWAYS has a 0 waiting time
             currentWaitingTime = expectedCheckOutTime(currentCustomer.getNumberOfItems());
         }
     }

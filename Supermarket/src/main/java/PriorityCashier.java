@@ -61,19 +61,24 @@ public class PriorityCashier extends FIFOCashier {
      */
     @Override
     public int expectedWaitingTime(Customer customer) {
-        int totalWaitingTime = 0;
+        int totalWaitingTime = getCurrentWaitingTime();
+
         for (Customer c : super.waitingQueue) {
+            if (c == customer){
+                break;
+            }
             if (customer.getNumberOfItems() <= maxNumPriorityItems){
                 if (c.getNumberOfItems() > maxNumPriorityItems){
                     break;
                 }
             }
 
+
             totalWaitingTime += expectedCheckOutTime(c.getNumberOfItems());
+            //Waiting time must be redone on customers with lower priority
+            
         }
 
-        totalWaitingTime += getCurrentWaitingTime();
-        customer.setActualWaitingTime(totalWaitingTime);
         return totalWaitingTime;
     }
 
