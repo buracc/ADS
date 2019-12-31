@@ -85,6 +85,5 @@ public class PriorityCashier extends FIFOCashier {
     @Override
     public void add(Customer customer) {
         super.add(customer);
-
     }
 }

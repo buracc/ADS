@@ -34,7 +34,7 @@ public class FIFOCashier extends Cashier {
 
     /**
      * Adds a given Customer to the queue of the Cashier,
-     * checks if Cashier is busy with a current Customer and adss 1 to max queue length.
+     * checks if Cashier is busy with a current Customer and adds 1 to max queue length.
      * <p>
      * If the given Customer has no items, skip him over and do not add him to the queue
      *
@@ -42,13 +42,8 @@ public class FIFOCashier extends Cashier {
      */
     @Override
     public void add(Customer customer) {
-        if (customer.getItems().size() == 0) {
-            return;
-        }
-
-        waitingQueue.add(customer);
+        super.add(customer);
         customer.setActualCheckOutTime(expectedCheckOutTime(customer.getNumberOfItems()));
-        customer.setCheckOutCashier(this);
 
         if (waitingQueue.size() >= maxQueueLength) {
             if (currentCustomer != null) {
