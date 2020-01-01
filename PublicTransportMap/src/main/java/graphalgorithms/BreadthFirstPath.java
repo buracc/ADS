@@ -9,9 +9,7 @@ public class BreadthFirstPath extends AbstractPathSearch {
 
     public BreadthFirstPath(TransportGraph graph, String start, String end) {
         super(graph, start, end);
-        marked = new boolean[graph.getNumberOfStations()];
-        edgeTo = new int[graph.getNumberOfStations()];
-    }
+     }
 
     @Override
     public void search() {

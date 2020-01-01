@@ -10,7 +10,7 @@ public class Line {
     private String type;
     private List<Station> stationsOnLine;
 
-    public Line(String type, String name) {
+    public Line(String name, String type) {
         this.name = name;
         this.type = type;
         stationsOnLine = new ArrayList<>();
@@ -26,6 +26,10 @@ public class Line {
 
     public String getName() {
         return name;
+    }
+
+    public String getType() {
+        return type;
     }
 
     @Override

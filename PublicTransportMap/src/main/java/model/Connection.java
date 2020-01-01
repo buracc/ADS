@@ -10,17 +10,12 @@ public class Connection {
     private double weight;
     private Line line;
 
-    public Connection(Station from, Station to) {
+    public Connection(Station from, Station to, double weight, Line line) {
         this.from = from;
         this.to = to;
-    }
-
-    public Connection(Station from, Station to, double weight, Line line) {
-        this(from, to);
         this.weight = weight;
         this.line = line;
     }
-
 
     public Station getFrom() {
         return from;
@@ -46,8 +41,6 @@ public class Connection {
         this.weight = weight;
     }
 
-
-
     @Override
     public boolean equals(Object other) {
         return this.from.equals(((Connection) other).from) && this.to.equals(((Connection) other).to);
@@ -60,6 +53,6 @@ public class Connection {
 
     @Override
     public String toString() {
-        return String.format("from %s to %s on line %s", getFrom().getStationName(), getTo().getStationName(), line);
+        return String.format("from [%s] to [%s] on line [%s], weight [%.1f]", getFrom().getStationName(), getTo().getStationName(), line, weight);
     }
 }

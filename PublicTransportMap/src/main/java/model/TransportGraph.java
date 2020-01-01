@@ -1,6 +1,7 @@
 package model;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class TransportGraph {
 
@@ -41,11 +42,9 @@ public class TransportGraph {
      * @param to
      */
     private void addEdge(int from, int to) {
-        // TODO
-        this.numberOfConnections++;
+        numberOfConnections++;
         if (from >= 0 && to >= 0) {
-            this.adjacencyLists[from].add(to);
-            this.adjacencyLists[to].add(from);
+            adjacencyLists[from].add(to);
         }
     }
 
@@ -53,7 +52,7 @@ public class TransportGraph {
     /**
      * Method to add an edge in the form of a connection between stations.
      * The method also adds the edge as an edge of indices by calling addEdge(int from, int to).
-     * The method adds the connecion to the connections 2D-array.
+     * The method adds the connection to the connections 2D-array.
      * The method also builds the reverse connection, Connection(To, From) and adds this to the connections 2D-array.
      *
      * @param connection The edge as a connection between stations
@@ -62,15 +61,12 @@ public class TransportGraph {
         Station from = connection.getFrom();
         Station to = connection.getTo();
 
-        if (this.getIndexOfStationByName(from.getStationName()) >= 0 && this.getIndexOfStationByName(to.getStationName()) >= 0) {
+        int indexFrom = getIndexOfStationByName(from.getStationName());
+        int indexTo = getIndexOfStationByName(to.getStationName());
 
-            int indexFrom = this.getIndexOfStationByName(from.getStationName());
-            int indexTo = this.getIndexOfStationByName(to.getStationName());
-
-            this.connections[indexFrom][indexTo] = connection;
-            this.connections[indexTo][indexFrom] = connection;
-
-            this.addEdge(indexFrom, indexTo);
+        if (indexFrom >= 0 && indexTo >= 0) {
+            connections[indexFrom][indexTo] = connection;
+            addEdge(indexFrom, indexTo);
         }
     }
 
@@ -79,11 +75,61 @@ public class TransportGraph {
     }
 
     public Connection getConnection(int from, int to) {
+        if (from < 0 || to < 0) {
+            return null;
+        }
+
         return connections[from][to];
     }
 
+    public Connection getConnection(String from, String to) {
+        int fromIndex = getIndexOfStationByName(from);
+        int toIndex = getIndexOfStationByName(to);
+        return getConnection(fromIndex, toIndex);
+    }
+
     public int getIndexOfStationByName(String stationName) {
+        if (!stationIndices.containsKey(stationName)) {
+            System.out.println(("Station: " + stationName + " does not exist"));
+            return -1;
+        }
+
         return stationIndices.get(stationName);
+    }
+
+    private List<Connection> getAllConnections() {
+        List<Connection> connections = new ArrayList<>();
+        for (Connection[] connection : this.connections) {
+            for (int j = 0; j < connection.length; j++) {
+                if (connection[j] != null) {
+                    connections.add(connection[j]);
+                }
+            }
+        }
+
+        return connections;
+    }
+
+    public List<Connection> getAdjacentConnections(Station from) {
+        return getAllConnections().stream()
+                .filter(x -> x.getFrom().equals(from))
+                .collect(Collectors.toList());
+    }
+
+    public void printConnectionDetails() {
+        for (Connection connection : getAllConnections()) {
+            System.out.println(connection);
+        }
+    }
+
+    public Station getStation(String name) {
+        for (Station s : stationList) {
+            if (s.getStationName().equals(name)) {
+                return s;
+            }
+        }
+
+        return null;
     }
 
     public Station getStation(int index) {
@@ -123,7 +169,6 @@ public class TransportGraph {
      * Then build the graph from these sets.
      */
     public static class Builder {
-
         private Set<Station> stationSet;
         private List<Line> lineList;
         private Set<Connection> connectionSet;
@@ -145,19 +190,74 @@ public class TransportGraph {
             String name = lineDefinition[0];
             String type = lineDefinition[1];
 
-            Line line = new Line(type, name);
+            Line line = new Line(name, type);
 
             for (int i = 2; i < lineDefinition.length; i++) {
                 Station station = new Station(lineDefinition[i]);
                 stationSet.add(station);
                 line.addStation(station);
             }
-            if (!lineList.contains(line)) {
-                lineList.add(line);
-            }
+
+            lineList.add(line);
             return this;
         }
 
+        public Builder addWeight(String[] lineDefinition, double[] weights) throws Exception {
+            String lineName = lineDefinition[0];
+            String lineType = lineDefinition[1];
+            int index = 0;
+
+            if (weights.length > (lineDefinition.length - 2)) {
+                throw new Exception("Weights array is not compatible with lines array.");
+            }
+
+            Line line = getLine(lineName, lineType);
+
+            if (line == null) {
+                throw new Exception("Line does not exist!");
+            }
+
+            Station tempPrev = null;
+            for (Station station : line.getStationsOnLine()) {
+                if (tempPrev == null) {
+                    tempPrev = station;
+                    continue;
+                }
+
+                Station prevStation = tempPrev;
+                Optional<Connection> connection = connectionSet.stream()
+                        .filter(x -> x.getFrom().equals(prevStation) && x.getTo().equals(station))
+                        .findFirst();
+                Optional<Connection> reverseConnection = connectionSet.stream()
+                        .filter(x -> x.getFrom().equals(station) && x.getTo().equals(prevStation))
+                        .findFirst();
+
+                if (connection.isPresent() && reverseConnection.isPresent()) {
+                    Connection conn = connection.get();
+                    Connection revConn = reverseConnection.get();
+                    conn.setWeight(weights[index]);
+                    revConn.setWeight(weights[index++]);
+                }
+
+                tempPrev = station;
+            }
+
+            return this;
+        }
+
+        private Line getLine(String name, String type) {
+            if (lineList.isEmpty()) {
+                return null;
+            }
+
+            for (Line line : lineList) {
+                if (line.getName().equals(name) && line.getType().equals(type)) {
+                    return line;
+                }
+            }
+
+            return null;
+        }
 
         /**
          * Method that reads all the lines and their stations to build a set of stations.
@@ -170,19 +270,22 @@ public class TransportGraph {
             return this;
         }
 
+
         /**
          * For every station on the set of station add the lines of that station to the lineList in the station
          *
          * @return
          */
+
         public Builder addLinesToStations() {
-            stationSet.forEach(station -> {
-                lineList.forEach(l ->{
-                    if (l.getStationsOnLine().contains(station) && !station.hasLine(l)) {
-                        station.addLine(l);
+            for (Station station : stationSet) {
+                for (Line line : lineList) {
+                    if (line.getStationsOnLine().contains(station) && !station.hasLine(line)) {
+                        station.addLine(line);
                     }
-                });
-            });
+                }
+            }
+
             return this;
         }
 
@@ -192,16 +295,26 @@ public class TransportGraph {
          * @return
          */
         public Builder buildConnections() {
-            for (Line line : this.lineList) {
-                for (int i = 0; i < line.getStationsOnLine().size(); i++) {
-                    if(!((i + 1) == line.getStationsOnLine().size())) {
-                        Connection connection = new Connection(line.getStationsOnLine().get(i), line.getStationsOnLine().get(i + 1));
-                        this.connectionSet.add(connection);
+            for (Line line : lineList) {
+                Station prev = null;
+                for (Station station : line.getStationsOnLine()) {
+                    if (prev == null) {
+                        prev = station;
+                        continue;
                     }
+
+                    Connection connection = new Connection(prev, station, 0.0, line);
+                    Connection connection2 = new Connection(station, prev, 0.0, line);
+                    connectionSet.add(connection);
+                    connectionSet.add(connection2);
+
+                    prev = station;
                 }
             }
+
             return this;
         }
+
 
         /**
          * Method that builds the graph.
