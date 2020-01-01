@@ -145,9 +145,10 @@ public class TransportGraphLauncher {
         System.out.println();
 
         //Dijkstra
-        DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(transportGraphB, "Ymeerdijk", "Violetplantsoen");
+        DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(transportGraphB, "Violetplantsoen", "Oostvaarders");
         dijkstraShortestPath.search();
         System.out.println(dijkstraShortestPath);
         dijkstraShortestPath.printNodesInVisitedOrder();
+        System.out.println(dijkstraShortestPath.getTotalWeight());
     }
 }
