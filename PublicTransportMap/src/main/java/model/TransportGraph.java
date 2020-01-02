@@ -245,6 +245,32 @@ public class TransportGraph {
             return this;
         }
 
+        public Builder addLocation(String[] lineDefinition, int[][] coordinates) throws Exception {
+            String lineName = lineDefinition[0];
+            String lineType = lineDefinition[1];
+
+            if (coordinates.length > (lineDefinition.length - 2)) {
+                throw new Exception("Weights array is not compatible with lines array.");
+            }
+
+            Line line = getLine(lineName, lineType);
+
+            if (line == null) {
+                throw new Exception("Line does not exist!");
+            }
+
+            for (int i = 0; i < line.getStationsOnLine().size(); i++) {
+                int x = coordinates[i][0];
+                int y = coordinates[i][1];
+
+                Location location = new Location(x, y);
+                Station station = line.getStationsOnLine().get(i);
+                station.setLocation(location);
+            }
+
+            return this;
+        }
+
         private Line getLine(String name, String type) {
             if (lineList.isEmpty()) {
                 return null;

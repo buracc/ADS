@@ -4,9 +4,9 @@ import model.*;
 
 public class DijkstraShortestPath extends AbstractPathSearch {
 
-    private final double[] distTo;
-    private final IndexMinPQ<Double> pq;
-    private final Line[] edgeToType;
+    protected final double[] distTo;
+    protected final IndexMinPQ<Double> pq;
+    protected final Line[] edgeToType;
 
     public DijkstraShortestPath(TransportGraph graph, String start, String end) {
         super(graph, start, end);
@@ -21,22 +21,22 @@ public class DijkstraShortestPath extends AbstractPathSearch {
         pq.insert(startIndex, 0.0);
     }
 
-    private void relax(TransportGraph graph, int v) {
-        Station station = graph.getStation(v);
+    public void relax(TransportGraph graph, int currentVertex) {
+        Station station = graph.getStation(currentVertex);
+        nodesVisited.add(station);
 
         for (Connection connection : graph.getAdjacentConnections(station)) {
-            int w = graph.getIndexOfStationByName(connection.getTo().getStationName());
-            nodesVisited.add(station);
-            edgeToType[w] = connection.getLine();
+            int nextVertex = graph.getIndexOfStationByName(connection.getTo().getStationName());
+            edgeToType[nextVertex] = connection.getLine();
 
-            if (distTo[w] > (distTo[v] + connection.getWeight() + getTransferPenalty(v, w))) {
-                distTo[w] = (distTo[v] + connection.getWeight());
-                edgeTo[w] = v;
+            if (distTo[nextVertex] > (distTo[currentVertex] + connection.getWeight() + getTransferPenalty(currentVertex, nextVertex))) {
+                distTo[nextVertex] = distTo[currentVertex] + connection.getWeight() + getTransferPenalty(currentVertex, nextVertex);
+                edgeTo[nextVertex] = currentVertex;
 
-                if (pq.contains(w)) {
-                    pq.changeKey(w, distTo[w]);
+                if (pq.contains(nextVertex)) {
+                    pq.decreaseKey(nextVertex, distTo[nextVertex]);
                 } else {
-                    pq.insert(w, distTo[w]);
+                    pq.insert(nextVertex, distTo[nextVertex]);
                 }
             }
         }
@@ -45,7 +45,8 @@ public class DijkstraShortestPath extends AbstractPathSearch {
     @Override
     public void search() {
         while (!pq.isEmpty()) {
-            relax(graph, pq.delMin());
+            int index = pq.delMin();
+            relax(graph, index);
         }
 
         pathTo(endIndex);
@@ -56,7 +57,7 @@ public class DijkstraShortestPath extends AbstractPathSearch {
         return distTo[vertex] < Double.POSITIVE_INFINITY;
     }
 
-    private int getTransferPenalty(int from, int to) {
+    protected int getTransferPenalty(int from, int to) {
         final int metroPenalty = 6;
         final int busPenalty = 3;
 

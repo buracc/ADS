@@ -7,6 +7,7 @@ public class Station {
 
     private String stationName;
     private Set<Line> lines;
+    private Location location;
 
     public Station(String nodeName) {
         this.stationName = nodeName;
@@ -23,6 +24,14 @@ public class Station {
 
     public Set<Line> getLines() {
         return lines;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     /**
@@ -73,6 +82,6 @@ public class Station {
 
     @Override
     public String toString() {
-        return stationName;
+        return stationName + " " + location;
     }
 }
