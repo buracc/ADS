@@ -24,39 +24,37 @@ public class TransportGraphLauncher {
 
     public static void main(String[] args) throws Exception {
         // Assignment A
+        String[] redLineA = {"red", "metro", "A", "B", "C", "D"};
+        String[] blueLineA = {"blue", "metro", "E", "B", "F", "G"};
+        String[] greenLineA = {"green", "metro", "H", "I", "C", "G", "J"};
+        String[] yellowLineA = {"yellow", "bus", "A", "E", "H", "D", "G", "A"};
 
-//        String[] redLineA = {"red", "metro", "A", "B", "C", "D"};
-//        String[] blueLineA = {"blue", "metro", "E", "B", "F", "G"};
-//        String[] greenLineA = {"green", "metro", "H", "I", "C", "G", "J"};
-//        String[] yellowLineA = {"yellow", "bus", "A", "E", "H", "D", "G", "A"};
-//
-//        List<String[]> linesA = new ArrayList<>();
-//        linesA.add(redLineA);
-//        linesA.add(blueLineA);
-//        linesA.add(greenLineA);
-//        linesA.add(yellowLineA);
-//
-//        TransportGraph transportGraphA = new TransportGraph.Builder()
-//                .addLine(redLineA)
-//                .addLine(blueLineA)
-//                .addLine(greenLineA)
-//                .addLine(yellowLineA)
-//                .buildStationSet()
-//                .addLinesToStations()
-//                .buildConnections()
-//                .build();
-//
-//        //Uncomment to test the builder:
-//        System.out.println(transportGraphA.getNumberOfStations());
-//        System.out.println(transportGraphA.getNumberEdges());
-//        System.out.println(transportGraphA);
-//
-//        System.out.println("## DFS ##");
-//        DepthFirstPath dfpTest = new DepthFirstPath(transportGraphA, "E", "J");
-//        dfpTest.search();
-//        System.out.println(dfpTest);
-//        dfpTest.printNodesInVisitedOrder();
-//        System.out.println();
+        List<String[]> linesA = new ArrayList<>();
+        linesA.add(redLineA);
+        linesA.add(blueLineA);
+        linesA.add(greenLineA);
+        linesA.add(yellowLineA);
+
+        TransportGraph transportGraphA = new TransportGraph.Builder()
+                .addLine(redLineA)
+                .addLine(blueLineA)
+                .addLine(greenLineA)
+                .addLine(yellowLineA)
+                .buildStationSet()
+                .addLinesToStations()
+                .buildConnections()
+                .build();
+
+        System.out.println(transportGraphA.getNumberOfStations());
+        System.out.println(transportGraphA.getNumberEdges());
+        System.out.println(transportGraphA);
+
+        System.out.println("## DFS ##");
+        DepthFirstPath dfpTest = new DepthFirstPath(transportGraphA, "E", "J");
+        dfpTest.search();
+        System.out.println(dfpTest);
+        dfpTest.printNodesInVisitedOrder();
+        System.out.println();
 //
 //        for (String[] lines : linesA) {
 //            for (int i = 2; i < lines.length; i++) {
@@ -77,12 +75,12 @@ public class TransportGraphLauncher {
 //            }
 //        }
 //
-//        System.out.println("## BFS ##");
-//        BreadthFirstPath bfsTest = new BreadthFirstPath(transportGraphA, "E", "J");
-//        bfsTest.search();
-//        System.out.println(bfsTest);
-//        bfsTest.printNodesInVisitedOrder();
-//        System.out.println();
+        System.out.println("## BFS ##");
+        BreadthFirstPath bfsTest = new BreadthFirstPath(transportGraphA, "E", "J");
+        bfsTest.search();
+        System.out.println(bfsTest);
+        bfsTest.printNodesInVisitedOrder();
+        System.out.println();
 //
 //        for (String[] lines : linesA) {
 //            for (int i = 2; i < lines.length; i++) {
@@ -120,7 +118,7 @@ public class TransportGraphLauncher {
                 {14, 1}, {12, 3}, {10, 5}, {8, 8}, {6, 9}, {3, 10}, {0, 11}
         };
         int[][] blueCoordinates = {
-                {9, 3}, {7, 6}, {6, 9}, {5, 1}, {5, 14}
+                {9, 3}, {7, 6}, {6, 9}, {6, 12}, {5, 14}
         };
         int[][] purpleCoordinates = {
                 {2, 3}, {4, 6}, {7, 6}, {8, 8}, {10, 9}
@@ -153,30 +151,32 @@ public class TransportGraphLauncher {
                 .addLocation(yellowLineB, yellowCoordinates)
                 .build();
 
-//        System.out.println("## DFS ##");
-//        DepthFirstPath dfpTestB = new DepthFirstPath(transportGraphB, "Ymeerdijk", "Violetplantsoen");
-//        dfpTestB.search();
-//        System.out.println(dfpTestB);
-//        dfpTestB.printNodesInVisitedOrder();
-//        System.out.println();
-//
-//        System.out.println("## BFS ##");
-//        BreadthFirstPath bfsTestB = new BreadthFirstPath(transportGraphB, "Ymeerdijk", "Violetplantsoen");
-//        bfsTestB.search();
-//        System.out.println(bfsTestB);
-//        bfsTestB.printNodesInVisitedOrder();
-//        System.out.println();
+        System.out.println("## DFS ##");
+        DepthFirstPath dfpTestB = new DepthFirstPath(transportGraphB, "Ymeerdijk", "Violetplantsoen");
+        dfpTestB.search();
+        System.out.println(dfpTestB);
+        dfpTestB.printNodesInVisitedOrder();
+        System.out.println();
+
+        System.out.println("## BFS ##");
+        BreadthFirstPath bfsTestB = new BreadthFirstPath(transportGraphB, "Ymeerdijk", "Violetplantsoen");
+        bfsTestB.search();
+        System.out.println(bfsTestB);
+        bfsTestB.printNodesInVisitedOrder();
+        System.out.println();
 
         //Dijkstra
-        DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(transportGraphB, "Violetplantsoen", "Trojelaan");
+        DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(transportGraphB, "Violetplantsoen", "Nobelplein");
         dijkstraShortestPath.search();
         System.out.println(dijkstraShortestPath);
         dijkstraShortestPath.printNodesInVisitedOrder();
+        System.out.println(dijkstraShortestPath.getTotalWeight());
+        System.out.println();
 
-        A_Star aStar = new A_Star(transportGraphB, "Violetplantsoen", "Trojelaan");
+        A_Star aStar = new A_Star(transportGraphB, "Violetplantsoen", "Nobelplein");
         aStar.search();
         System.out.println(aStar);
         aStar.printNodesInVisitedOrder();
-
+        System.out.println(aStar.getTotalWeight());
     }
 }

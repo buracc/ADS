@@ -28,9 +28,10 @@ public class DijkstraShortestPath extends AbstractPathSearch {
         for (Connection connection : graph.getAdjacentConnections(station)) {
             int nextVertex = graph.getIndexOfStationByName(connection.getTo().getStationName());
             edgeToType[nextVertex] = connection.getLine();
+            double totalTravelCost = distTo[currentVertex] + connection.getWeight() + getTransferPenalty(currentVertex, nextVertex);
 
-            if (distTo[nextVertex] > (distTo[currentVertex] + connection.getWeight() + getTransferPenalty(currentVertex, nextVertex))) {
-                distTo[nextVertex] = distTo[currentVertex] + connection.getWeight() + getTransferPenalty(currentVertex, nextVertex);
+            if (distTo[nextVertex] > totalTravelCost) {
+                distTo[nextVertex] = totalTravelCost;
                 edgeTo[nextVertex] = currentVertex;
 
                 if (pq.contains(nextVertex)) {
@@ -46,6 +47,10 @@ public class DijkstraShortestPath extends AbstractPathSearch {
     public void search() {
         while (!pq.isEmpty()) {
             int index = pq.delMin();
+            if (index == endIndex) {
+                break;
+            }
+
             relax(graph, index);
         }
 

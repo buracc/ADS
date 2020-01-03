@@ -82,6 +82,6 @@ public class Station {
 
     @Override
     public String toString() {
-        return stationName + " " + location;
+        return stationName + (location != null ? " " + location : "");
     }
 }
