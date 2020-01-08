@@ -330,9 +330,7 @@ public class TransportGraph {
                     }
 
                     Connection connection = new Connection(prev, station, 0.0, line);
-                    Connection connection2 = new Connection(station, prev, 0.0, line);
                     connectionSet.add(connection);
-                    connectionSet.add(connection2);
 
                     prev = station;
                 }
