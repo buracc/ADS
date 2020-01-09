@@ -23,14 +23,15 @@ public class BreadthFirstPath extends AbstractPathSearch {
 
             for (int w : graph.getAdjacentVertices(currentIndex)) {
                 if (!marked[w]) {
+
                     nodesVisited.add(graph.getStation(w));
                     edgeTo[w] = currentIndex;
                     marked[w] = true;
                     queue.add(w);
-
                     if (w == endIndex) {
                         break;
                     }
+
                 }
             }
         }

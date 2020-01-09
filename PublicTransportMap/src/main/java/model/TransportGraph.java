@@ -23,6 +23,7 @@ public class TransportGraph {
         }
     }
 
+
     /**
      * @param vertex Station to be added to the stationList
      *               The method also adds the station with it's index to the map stationIndices

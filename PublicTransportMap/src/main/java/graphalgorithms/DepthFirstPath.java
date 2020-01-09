@@ -15,7 +15,7 @@ public class DepthFirstPath extends AbstractPathSearch {
         pathTo(endIndex);
     }
 
-    private void recursiveSearch(int vertex){
+    private void recursiveSearch(int vertex) {
         marked[vertex] = true;
 
         for (int w : graph.getAdjacentVertices(vertex)) {
@@ -23,6 +23,9 @@ public class DepthFirstPath extends AbstractPathSearch {
                 nodesVisited.add(graph.getStation(w));
                 edgeTo[w] = vertex;
                 marked[w] = true;
+                if (w == endIndex){
+                    break;
+                }
                 recursiveSearch(w);
             }
         }

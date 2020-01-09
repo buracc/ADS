@@ -38,6 +38,18 @@ public abstract class AbstractPathSearch {
         verticesInPath = new LinkedList<>();
     }
 
+    public int getTransfers() {
+        return transfers;
+    }
+
+    public List<Station> getNodesVisited() {
+        return nodesVisited;
+    }
+
+    public List<Station> getNodesInPath() {
+        return nodesInPath;
+    }
+
     public abstract void search();
 
     /**
