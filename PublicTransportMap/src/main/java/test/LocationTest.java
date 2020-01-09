@@ -21,8 +21,8 @@ public class LocationTest {
 
     @Test
     public void checkSquares() {
-        int distance = 20;
-        assertEquals(distance, a.getTravelledSquares(b));
+        int squares = 20;
+        assertEquals(20, a.getTravelledSquares(b));
     }
 
     @Test

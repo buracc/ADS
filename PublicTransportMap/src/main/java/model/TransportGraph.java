@@ -329,8 +329,11 @@ public class TransportGraph {
                         continue;
                     }
 
-                    Connection connection = new Connection(prev, station, 0.0, line);
-                    connectionSet.add(connection);
+                    Connection forthConnection = new Connection(prev, station, 0.0, line);
+                    connectionSet.add(forthConnection);
+
+                    Connection backConnection = new Connection(station, prev, 0.0, line);
+                    connectionSet.add(backConnection);
 
                     prev = station;
                 }

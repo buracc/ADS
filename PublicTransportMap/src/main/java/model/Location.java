@@ -20,8 +20,12 @@ public class Location {
     }
 
     public double travelTime(Location to) {
-        return getTravelledSquares(to) * TRAVEL_TIME;
+        return Math.sqrt(Math.pow(to.getX() - x, 2) + Math.pow(to.getY() - x, 2)) * TRAVEL_TIME;
     }
+
+//    public double travelTime(Location to) {
+//        return getTravelledSquares(to) * TRAVEL_TIME;
+//    }
 
     public int getTravelledSquares(Location to) {
         int xDiff = Math.abs(x - to.getX());

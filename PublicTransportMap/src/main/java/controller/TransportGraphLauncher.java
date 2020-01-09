@@ -152,28 +152,28 @@ public class TransportGraphLauncher {
                 .build();
 
         System.out.println("## DFS ##");
-        DepthFirstPath dfpTestB = new DepthFirstPath(transportGraphB, "Ymeerdijk", "Violetplantsoen");
+        DepthFirstPath dfpTestB = new DepthFirstPath(transportGraphB, "Violetplantsoen", "Trojelaan");
         dfpTestB.search();
         System.out.println(dfpTestB);
         dfpTestB.printNodesInVisitedOrder();
         System.out.println();
 
         System.out.println("## BFS ##");
-        BreadthFirstPath bfsTestB = new BreadthFirstPath(transportGraphB, "Ymeerdijk", "Violetplantsoen");
+        BreadthFirstPath bfsTestB = new BreadthFirstPath(transportGraphB, "Violetplantsoen", "Trojelaan");
         bfsTestB.search();
         System.out.println(bfsTestB);
         bfsTestB.printNodesInVisitedOrder();
         System.out.println();
 
         //Dijkstra
-        DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(transportGraphB, "Violetplantsoen", "Nobelplein");
+        DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(transportGraphB, "Violetplantsoen", "Trojelaan");
         dijkstraShortestPath.search();
         System.out.println(dijkstraShortestPath);
         dijkstraShortestPath.printNodesInVisitedOrder();
         System.out.println(dijkstraShortestPath.getTotalWeight());
         System.out.println();
 
-        A_Star aStar = new A_Star(transportGraphB, "Violetplantsoen", "Nobelplein");
+        A_Star aStar = new A_Star(transportGraphB, "Violetplantsoen", "Trojelaan");
         aStar.search();
         System.out.println(aStar);
         aStar.printNodesInVisitedOrder();
