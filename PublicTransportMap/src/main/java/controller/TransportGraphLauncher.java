@@ -58,7 +58,7 @@ public class TransportGraphLauncher {
 
 
         System.out.println("## BFS ##");
-        BreadthFirstPath bfsTest = new BreadthFirstPath(transportGraphA, "E", "J");
+        BreadthFirstPath bfsTest = new BreadthFirstPath(transportGraphA, "A", "C");
         bfsTest.search();
         System.out.println(bfsTest);
         bfsTest.printNodesInVisitedOrder();

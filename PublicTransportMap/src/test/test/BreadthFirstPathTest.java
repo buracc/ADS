@@ -44,6 +44,8 @@ public class BreadthFirstPathTest {
         bfs.search();
         assertFalse(bfs.getNodesInPath().size() > 2);
         String path = "[A, B]";
+        System.out.println(bfs.toString());
+        System.out.println(bfs.getNodesVisited());
         assertEquals(path, bfs.getNodesInPath().toString());
         assertEquals(path, bfs.getNodesVisited().toString());
     }

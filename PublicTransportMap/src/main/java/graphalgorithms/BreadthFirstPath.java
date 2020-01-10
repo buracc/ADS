@@ -18,6 +18,7 @@ public class BreadthFirstPath extends AbstractPathSearch {
         marked[startIndex] = true;
         queue.add(startIndex);
 
+        loop:
         while (!queue.isEmpty()) {
             int currentIndex = queue.remove();
 
@@ -25,15 +26,16 @@ public class BreadthFirstPath extends AbstractPathSearch {
                 if (!marked[w]) {
 
                     nodesVisited.add(graph.getStation(w));
+                    System.out.println("add " + graph.getStation(w));
                     edgeTo[w] = currentIndex;
                     marked[w] = true;
-                    queue.add(w);
                     if (w == endIndex) {
-                        break;
+                        break loop;
                     }
-
+                    queue.add(w);
                 }
             }
+
         }
 
         pathTo(endIndex);
