@@ -26,7 +26,6 @@ public class BreadthFirstPath extends AbstractPathSearch {
                 if (!marked[w]) {
 
                     nodesVisited.add(graph.getStation(w));
-                    System.out.println("add " + graph.getStation(w));
                     edgeTo[w] = currentIndex;
                     marked[w] = true;
                     if (w == endIndex) {
