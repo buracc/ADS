@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fb2836e8-9837-4da5-b465-68b46f89ecda" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/nl/hva/ict/se/sands/BackwardsSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/hva/ict/se/sands/BackwardsSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nl/hva/ict/se/sands/HuffmanCompression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/hva/ict/se/sands/HuffmanCompression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/nl/hva/ict/se/sands/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/hva/ict/se/sands/Node.java" afterDir="false" />
+    <list default="true" id="795b1806-9481-454c-868e-6ebab274346e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/controller/TransportGraphLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/controller/TransportGraphLauncher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/graphalgorithms/A_Star.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/graphalgorithms/A_Star.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/graphalgorithms/AbstractPathSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/graphalgorithms/AbstractPathSearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/graphalgorithms/DijkstraShortestPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/graphalgorithms/DijkstraShortestPath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/model/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/model/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/test/test/A_StarTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/test/java/test/A_StarTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/test/test/BreadthFirstPathTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/test/java/test/BreadthFirstPathTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/test/test/DepthFirstPathTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/test/java/test/DepthFirstPathTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/test/test/DijkstraShortestPathTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/test/java/test/DijkstraShortestPathTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/test/test/LocationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/test/java/test/LocationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/test/test/TransportGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/test/java/test/TransportGraphTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/SandS.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/princeton/cs/algs4/Huffman.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nl/hva/ict/se/sands/BackwardsSearch.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nl/hva/ict/se/sands/HuffmanCompression.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nl/hva/ict/se/sands/Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/nl/hva/ict/se/sands/BackwardsSearchTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/nl/hva/ict/se/sands/HuffmanCompressionTest.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,27 +33,11 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="IgnoredFileRootStore">
-    <option name="generatedRoots">
-      <set>
-        <option value="C:\Users\burak\IdeaProjects\school\ads\SandS\.idea" />
-      </set>
-    </option>
-  </component>
-  <component name="ProjectId" id="1WAF5NFtVsFYAzCxvcq8fm2OkG9" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="1WDhtZFUxRCXG4B7l4kUrI3WyiC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -46,86 +49,6 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-  </component>
-  <component name="RunManager" selected="JUnit.HuffmanCompressionTest">
-    <configuration name="BackwardsSearch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="nl.hva.ict.se.sands.BackwardsSearch" />
-      <module name="SandS" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="nl.hva.ict.se.sands.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BoyerMoore" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="nl.hva.ict.se.sands.BoyerMoore" />
-      <module name="SandS" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="nl.hva.ict.se.sands.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HuffmanCompression" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="nl.hva.ict.se.sands.HuffmanCompression" />
-      <module name="SandS" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="nl.hva.ict.se.sands.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BackwardsSearchTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SandS" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="nl.hva.ict.se.sands.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="nl.hva.ict.se.sands" />
-      <option name="MAIN_CLASS_NAME" value="nl.hva.ict.se.sands.BackwardsSearchTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HuffmanCompressionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SandS" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="nl.hva.ict.se.sands.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="nl.hva.ict.se.sands" />
-      <option name="MAIN_CLASS_NAME" value="nl.hva.ict.se.sands.HuffmanCompressionTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JUnit.HuffmanCompressionTest" />
-        <item itemvalue="Application.HuffmanCompression" />
-        <item itemvalue="Application.BackwardsSearch" />
-        <item itemvalue="JUnit.BackwardsSearchTest" />
-        <item itemvalue="Application.BoyerMoore" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -144,40 +67,16 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="fb2836e8-9837-4da5-b465-68b46f89ecda" name="Default Changelist" comment="" />
-      <created>1578584307488</created>
+      <changelist id="795b1806-9481-454c-868e-6ebab274346e" name="Default Changelist" comment="" />
+      <created>1578690287083</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1578584307488</updated>
-      <workItem from="1578584309922" duration="222000" />
-      <workItem from="1578584534351" duration="11729000" />
-      <workItem from="1578655659138" duration="1351000" />
+      <updated>1578690287083</updated>
+      <workItem from="1578690288455" duration="629000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1921" height="237" key="GridCell.Tab.0.bottom" timestamp="1578610052168">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1921" height="237" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.-69.1920.1040@0.0.1920.1040" timestamp="1578610052168" />
-    <state width="1921" height="237" key="GridCell.Tab.0.center" timestamp="1578610052168">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1921" height="237" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.-69.1920.1040@0.0.1920.1040" timestamp="1578610052168" />
-    <state width="1921" height="237" key="GridCell.Tab.0.left" timestamp="1578610052168">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1921" height="237" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.-69.1920.1040@0.0.1920.1040" timestamp="1578610052168" />
-    <state width="1921" height="237" key="GridCell.Tab.0.right" timestamp="1578610052168">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1921" height="237" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.-69.1920.1040@0.0.1920.1040" timestamp="1578610052168" />
-    <state x="675" y="240" key="run.anything.popup" timestamp="1578587532030">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="675" y="240" key="run.anything.popup/0.0.1920.1040/-1920.-69.1920.1040@0.0.1920.1040" timestamp="1578587532030" />
   </component>
 </project>

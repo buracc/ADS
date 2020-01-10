@@ -24,6 +24,7 @@ public abstract class AbstractPathSearch {
     protected TransportGraph graph;
     protected final int startIndex;
     protected final int endIndex;
+    protected final Line[] edgeToType;
 
     private double totalWeight;
 
@@ -36,6 +37,7 @@ public abstract class AbstractPathSearch {
         edgeTo = new int[graph.getNumberOfStations()];
         nodesInPath = new ArrayList<>();
         verticesInPath = new LinkedList<>();
+        edgeToType = new Line[graph.getNumberOfStations()];
     }
 
     public int getTransfers() {
@@ -66,34 +68,35 @@ public abstract class AbstractPathSearch {
      * Then the list nodesInPath containing the actual stations is build.
      * Also the number of transfers is counted.
      *
-     * @param vertex The station (vertex) as an index
+     * @param end The station (vertex) as an index
      */
-    public void pathTo(int vertex) {
-        if (!hasPathTo(vertex)) {
+    public void pathTo(int end) {
+        if (!hasPathTo(end)) {
             return;
         }
 
         Line commonLine = null;
         Stack<Station> path = new Stack<>();
-        for (int x = vertex; x != startIndex; x = edgeTo[x]) {
-            Station current = graph.getStation(x);
-            Station next = graph.getStation(edgeTo[x]);
+        for (int toIndex = end; toIndex != startIndex; toIndex = edgeTo[toIndex]) {
+            int fromIndex = edgeTo[toIndex];
+            Station prev = graph.getStation(edgeTo[toIndex]);
+            Station current = graph.getStation(toIndex);
 
             path.push(current);
 
-            Connection connection = graph.getConnection(x, edgeTo[x]);
+            Connection connection = graph.getConnection(fromIndex, toIndex);
             if (connection != null) {
-                totalWeight += connection.getWeight();
+                totalWeight += (connection.getWeight() + getTransferPenalty(fromIndex, toIndex));
             }
 
             if (commonLine == null) {
-                commonLine = current.getCommonLine(next);
+                commonLine = current.getCommonLine(prev);
                 continue;
             }
 
-            if (!commonLine.getStationsOnLine().contains(next)) {
+            if (!commonLine.getStationsOnLine().contains(prev)) {
                 countTransfers();
-                commonLine = current.getCommonLine(next);
+                commonLine = current.getCommonLine(prev);
             }
         }
 
@@ -104,6 +107,44 @@ public abstract class AbstractPathSearch {
             nodesInPath.add(current);
             verticesInPath.add(graph.getIndexOfStationByName(current.getStationName()));
         }
+    }
+
+    protected int getTransferPenalty(int from, int to) {
+        final int metroPenalty = 6;
+        final int busPenalty = 3;
+
+        Line currentLine = edgeToType[from];
+        Line newLine = graph.getConnection(from, to).getLine();
+
+        if (currentLine == null || newLine == null) {
+            return 0;
+        }
+
+        switch (currentLine.getType()) {
+            case "metro":
+                if (newLine.getType().equals("metro") && !newLine.getName().equals(currentLine.getName())) {
+                    return metroPenalty;
+                }
+
+                if (newLine.getType().equals("bus")) {
+                    return busPenalty;
+                }
+
+                if (newLine.getType().equals("metro") && newLine.getName().equals(currentLine.getName())) {
+                    return 0;
+                }
+
+                break;
+
+            case "bus":
+                if (newLine.getType().equals("bus")) {
+                    return 0;
+                }
+
+                return busPenalty;
+        }
+
+        return 0;
     }
 
     public int pathSize() {

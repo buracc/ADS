@@ -140,7 +140,7 @@ public class TransportGraphLauncher {
         System.out.println();
 
         //Dijkstra
-        DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(transportGraphB, "Violetplantsoen", "Trojelaan");
+        DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(transportGraphB, "Haven", "Nobelplein");
         dijkstraShortestPath.search();
         System.out.println(dijkstraShortestPath);
         dijkstraShortestPath.printNodesInVisitedOrder();
@@ -151,7 +151,7 @@ public class TransportGraphLauncher {
         printOverview(dijkstraShortestPath, linesB, transportGraphB);
         System.out.println();
 
-        A_Star aStar = new A_Star(transportGraphB, "Violetplantsoen", "Trojelaan");
+        A_Star aStar = new A_Star(transportGraphB, "Haven", "Nobelplein");
         aStar.search();
         System.out.println(aStar);
         aStar.printNodesInVisitedOrder();
