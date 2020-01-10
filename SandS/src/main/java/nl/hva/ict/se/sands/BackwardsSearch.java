@@ -9,7 +9,7 @@ public class BackwardsSearch {
      * @return -1 if the <code>needle</code> is not found and otherwise the left most index of the first
      * character of the <code>needle</code>.
      */
-    private int successfulComparisons = 1;
+    private int successfulComparisons = 0;
     private int totalComparisons;
 
     int findLocation(String needle, String haystack) {
@@ -24,7 +24,7 @@ public class BackwardsSearch {
                 totalComparisons++;
                 char haystackChar = haystackChars[iterationIndex];
                 if (needleChar == haystackChar) {
-                    if (successfulComparisons == needleChars.length) {
+                    if (successfulComparisons == needleChars.length - 1) {
                         return i;
                     }
 
@@ -33,7 +33,7 @@ public class BackwardsSearch {
                     continue;
                 }
 
-                successfulComparisons = 1;
+                successfulComparisons = 0;
 
                 if (charInPattern(needleChar, haystackChars)) {
                     i--;
@@ -58,7 +58,7 @@ public class BackwardsSearch {
 //        System.out.println(backwardsSearch.findLocation(needle, haystack));
 
         String haystack = "abacadabrabracabracadabrabrabracad";
-        String needle = "abacadab";
+        String needle = "cabraca";
 
         System.out.println(needle.length());
         System.out.println(haystack.length());

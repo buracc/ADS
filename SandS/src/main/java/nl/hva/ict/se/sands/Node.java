@@ -22,7 +22,7 @@ public class Node implements Comparable<Node> {
 
     @Override
     public int compareTo(Node o) {
-        return 0;
+        return getWeight() - o.getWeight();
     }
 
     public Node getLeft() {
@@ -39,6 +39,15 @@ public class Node implements Comparable<Node> {
 
     public Character getCharacter() {
         return character;
+    }
+
+    /**
+     * Taken from https://algs4.cs.princeton.edu/55compression/Huffman.java.html
+     * @return boolean value whether Node is a Leaf
+     */
+    public boolean isLeaf() {
+        assert ((left == null) && (right == null)) || ((left != null) && (right != null));
+        return (left == null) && (right == null);
     }
 
 }
