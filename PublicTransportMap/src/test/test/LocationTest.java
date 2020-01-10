@@ -27,7 +27,7 @@ public class LocationTest {
 
     @Test
     public void checkTravelTime(){
-        int distance = 20;
+        double distance = Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
         double timePassed = distance*1.5;
         assertEquals(timePassed, a.travelTime(b), 0.00001);
 

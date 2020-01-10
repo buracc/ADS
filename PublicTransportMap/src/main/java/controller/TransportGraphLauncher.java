@@ -1,9 +1,6 @@
 package controller;
 
-import graphalgorithms.A_Star;
-import graphalgorithms.BreadthFirstPath;
-import graphalgorithms.DepthFirstPath;
-import graphalgorithms.DijkstraShortestPath;
+import graphalgorithms.*;
 import model.Connection;
 import model.Location;
 import model.Station;
@@ -55,51 +52,20 @@ public class TransportGraphLauncher {
         System.out.println(dfpTest);
         dfpTest.printNodesInVisitedOrder();
         System.out.println();
-//
-//        for (String[] lines : linesA) {
-//            for (int i = 2; i < lines.length; i++) {
-//                String from = lines[i];
-//
-//                for (int j = 2; j < lines.length; j++) {
-//                    String to = lines[j];
-//                    if (to.equals(from)) {
-//                        continue;
-//                    }
-//
-//                    DepthFirstPath dfs = new DepthFirstPath(transportGraphA, from, to);
-//                    dfs.search();
-//                    System.out.println(dfs);
-//                    dfs.printNodesInVisitedOrder();
-//                    System.out.println();
-//                }
-//            }
-//        }
-//
+
+        System.out.println("## Overview DFS");
+        printOverview(dfpTest, linesA, transportGraphA);
+
+
         System.out.println("## BFS ##");
-        BreadthFirstPath bfsTest = new BreadthFirstPath(transportGraphA, "E", "J");
+        BreadthFirstPath bfsTest = new BreadthFirstPath(transportGraphA, "A", "C");
         bfsTest.search();
         System.out.println(bfsTest);
         bfsTest.printNodesInVisitedOrder();
         System.out.println();
-//
-//        for (String[] lines : linesA) {
-//            for (int i = 2; i < lines.length; i++) {
-//                String from = lines[i];
-//
-//                for (int j = 2; j < lines.length; j++) {
-//                    String to = lines[j];
-//                    if (to.equals(from)) {
-//                        continue;
-//                    }
-//
-//                    BreadthFirstPath bfs = new BreadthFirstPath(transportGraphA, from, to);
-//                    bfs.search();
-//                    System.out.println(bfs);
-//                    bfs.printNodesInVisitedOrder();
-//                    System.out.println();
-//                }
-//            }
-//        }
+
+        System.out.println("## Overview BFS");
+        printOverview(dfpTest, linesA, transportGraphA);
 
         // Assignment B
         String[] redLineB = {"red", "metro", "Haven", "Marken", "Steigerplein", "Centrum", "Meridiaan", "Dukdalf", "Oostvaarders"};
@@ -107,6 +73,14 @@ public class TransportGraphLauncher {
         String[] purpleLineB = {"purple", "metro", "Grote Sluis", "Grootzeil", "Coltrane Cirkel", "Centrum", "Swingstraat"};
         String[] greenLineB = {"green", "metro", "Ymeerdijk", "Trojelaan", "Steigerplein", "Swingstraat", "Bachgracht", "Nobelplein"};
         String[] yellowLineB = {"yellow", "bus", "Grote sluis", "Ymeerdijk", "Haven", "Nobelplein", "Violetplantsoen", "Oostvaarders", "Grote sluis"};
+
+        List<String[]> linesB = new ArrayList<>();
+        linesB.add(redLineB);
+        linesB.add(blueLineB);
+        linesB.add(purpleLineB);
+        linesB.add(greenLineB);
+        linesB.add(yellowLineB);
+
 
         double[] redWeights = {4.5, 4.7, 6.1, 3.5, 5.4, 5.6};
         double[] blueWeights = {6.0, 5.3, 5.1, 3.3};
@@ -173,10 +147,54 @@ public class TransportGraphLauncher {
         System.out.println(dijkstraShortestPath.getTotalWeight());
         System.out.println();
 
+        System.out.println("## Overview Dijkstra");
+        printOverview(dijkstraShortestPath, linesB, transportGraphB);
+        System.out.println();
+
         A_Star aStar = new A_Star(transportGraphB, "Violetplantsoen", "Trojelaan");
         aStar.search();
         System.out.println(aStar);
         aStar.printNodesInVisitedOrder();
         System.out.println(aStar.getTotalWeight());
+        System.out.println();
+
+        System.out.println("## Overview A_star");
+        printOverview(aStar, linesB, transportGraphB);
+    }
+
+    private static void printOverview(AbstractPathSearch abstractPathSearch, List<String[]> listOfLines, TransportGraph transportGraph){
+        int counter = 0;
+        for (String[] lines : listOfLines) {
+            for (int i = 2; i < lines.length; i++) {
+                String from = lines[i];
+
+                for (int j = 2; j < lines.length; j++) {
+                    if (counter == 10){
+                        break;
+                    }
+                    String to = lines[j];
+                    if (to.equals(from)) {
+                        continue;
+                    }
+
+                    if (abstractPathSearch instanceof DepthFirstPath){
+                        abstractPathSearch = new DepthFirstPath(transportGraph, from, to);
+                    }else if (abstractPathSearch instanceof BreadthFirstPath){
+                        abstractPathSearch = new BreadthFirstPath(transportGraph, from, to);
+                    }else if (abstractPathSearch instanceof DijkstraShortestPath){
+                        abstractPathSearch = new DijkstraShortestPath(transportGraph, from, to);
+                    }else{
+                        abstractPathSearch = new A_Star(transportGraph, from, to);
+                    }
+
+                    abstractPathSearch.search();
+                    System.out.println(abstractPathSearch);
+                    abstractPathSearch.printNodesInVisitedOrder();
+                    System.out.println("--------------------------------------------");
+                    counter++;
+                }
+            }
+        }
+
     }
 }

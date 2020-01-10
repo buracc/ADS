@@ -17,7 +17,7 @@ public class TransportGraphTest {
     private String[] greenLineA = {"green", "metro", "H", "I", "C", "G", "J"};
     private String[] yellowLineA = {"yellow", "bus", "A", "E", "H", "D", "G", "A"};
 
-    List<String[]> linesA;
+    private List<String[]> linesA;
     private TransportGraph transportGraph;
 
     @Before
@@ -50,7 +50,7 @@ public class TransportGraphTest {
     @Test
     public void checkAmount(){
         int stations = 10;
-        int edges = 15;
+        int edges = 15*2;
         assertEquals(stations, transportGraph.getNumberOfStations());
         assertEquals(edges, transportGraph.getNumberEdges());
     }
