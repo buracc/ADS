@@ -1,18 +1,15 @@
 package nl.hva.ict.se.sands;
 
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Scanner;
+import java.util.*;
 
 public class HuffmanCompression {
 
     public static void main(String[] args) {
-        HuffmanCompression huffmanCompression = new HuffmanCompression("aba");
-        System.out.println(huffmanCompression.compress());
+        HuffmanCompression huffmanCompression = new HuffmanCompression("cacbcac");
+//        System.out.println(huffmanCompression.compress());
         System.out.println(huffmanCompression.getCompressionTree());
-        System.out.println(huffmanCompression.getCodes());
+//        System.out.println(huffmanCompression.getCodes());
     }
 
     private static final int ASCII_TABLE_SIZE = 128;
@@ -74,15 +71,18 @@ public class HuffmanCompression {
     private Node buildTree() {
         char[] text = this.text.toCharArray();
         int[] freq = new int[ASCII_TABLE_SIZE];
+        Set<Character> uniqueChars = new HashSet<>();
 
         for (char c : text) {
             freq[c]++;
+            uniqueChars.add(c);
         }
 
         PriorityQueue<Node> pq = new PriorityQueue<>();
 
-        for (char c : text) {
-            pq.add(new Node(freq[c], c));
+        for (char c : uniqueChars) {
+            Node node = new Node(freq[c], c);
+            pq.add(node);
         }
 
         // special case in case there is only one character with a nonzero frequency
@@ -91,16 +91,20 @@ public class HuffmanCompression {
             else pq.add(new Node(0, '\1'));
         }
 
-        while (pq.size() > 1) {
-            Node left = pq.poll();
-            Node right = pq.poll();
-            Node parent = new Node(left, right);
-            pq.offer(parent);
+        while (!pq.isEmpty()) {
+            Node node = pq.poll();
+            System.out.println(node.getWeight());
+//            Node left = pq.delMin();
+//            Node right = pq.delMin();
+//            Node parent = new Node(left, right);
+//            pq.insert(parent);
         }
 
-        huffmanTree = pq.poll();
+//        huffmanTree = pq.delMin();
 
-        return huffmanTree;
+//        return huffmanTree;
+        System.out.println();
+        return null;
     }
 
     /**
