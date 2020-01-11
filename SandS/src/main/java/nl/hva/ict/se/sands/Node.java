@@ -50,4 +50,13 @@ public class Node implements Comparable<Node> {
         return (left == null) && (right == null);
     }
 
+    @Override
+    public String toString() {
+        return "Node{" +
+                (left != null ? "left=" + left : "") +
+                (right != null ? ", right=" + right + ", " : "") +
+                "weight=" + weight +
+                (character != null ? ", character=" + character : "") +
+                '}';
+    }
 }

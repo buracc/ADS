@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="795b1806-9481-454c-868e-6ebab274346e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/inleveren.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/controller/TransportGraphLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/controller/TransportGraphLauncher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/graphalgorithms/A_Star.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/graphalgorithms/A_Star.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/hva/ict/se/sands/HuffmanCompression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/hva/ict/se/sands/HuffmanCompression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/hva/ict/se/sands/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/hva/ict/se/sands/Node.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +31,42 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
+  <component name="RunManager" selected="Application.HuffmanCompression">
+    <configuration name="HuffmanCompression" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="nl.hva.ict.se.sands.HuffmanCompression" />
+      <module name="SandS" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="nl.hva.ict.se.sands.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HuffmanCompressionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SandS" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="nl.hva.ict.se.sands.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="nl.hva.ict.se.sands" />
+      <option name="MAIN_CLASS_NAME" value="nl.hva.ict.se.sands.HuffmanCompressionTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.HuffmanCompression" />
+        <item itemvalue="JUnit.HuffmanCompressionTest" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
       <list>
@@ -55,10 +90,33 @@
       <option name="presentableId" value="Default" />
       <updated>1578690287083</updated>
       <workItem from="1578690288455" duration="668000" />
+      <workItem from="1578746588539" duration="1321000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="729" y="221" key="#com.intellij.ide.util.MemberChooser" timestamp="1578746858769">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="729" y="221" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.-69.1920.1040@0.0.1920.1040" timestamp="1578746858769" />
+    <state width="1921" height="289" key="GridCell.Tab.0.bottom" timestamp="1578747763119">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1921" height="289" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.-69.1920.1040@0.0.1920.1040" timestamp="1578747763119" />
+    <state width="1921" height="289" key="GridCell.Tab.0.center" timestamp="1578747763119">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1921" height="289" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.-69.1920.1040@0.0.1920.1040" timestamp="1578747763119" />
+    <state width="1921" height="289" key="GridCell.Tab.0.left" timestamp="1578747763119">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1921" height="289" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.-69.1920.1040@0.0.1920.1040" timestamp="1578747763119" />
+    <state width="1921" height="289" key="GridCell.Tab.0.right" timestamp="1578747763119">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1921" height="289" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.-69.1920.1040@0.0.1920.1040" timestamp="1578747763119" />
   </component>
 </project>

@@ -6,10 +6,10 @@ import java.util.*;
 public class HuffmanCompression {
 
     public static void main(String[] args) {
-        HuffmanCompression huffmanCompression = new HuffmanCompression("cacbcac");
-//        System.out.println(huffmanCompression.compress());
+        HuffmanCompression huffmanCompression = new HuffmanCompression(HuffmanCompression.class.getResourceAsStream("/edu/princeton/cs/algs4/Huffman.java"));
+        System.out.println(huffmanCompression.compress());
         System.out.println(huffmanCompression.getCompressionTree());
-//        System.out.println(huffmanCompression.getCodes());
+        System.out.println(huffmanCompression.getCodes());
     }
 
     private static final int ASCII_TABLE_SIZE = 128;
@@ -50,7 +50,6 @@ public class HuffmanCompression {
         Map<Character, String> codes = getCodes();
         StringBuilder compressed = new StringBuilder();
 
-        // Write Huffman compressed text
         for (char c : text.toCharArray()) {
             String code = codes.get(c);
             compressed.append(code);
@@ -86,25 +85,22 @@ public class HuffmanCompression {
         }
 
         // special case in case there is only one character with a nonzero frequency
+        // Taken from https://algs4.cs.princeton.edu/55compression/Huffman.java.html
         if (pq.size() == 1) {
             if (freq['\0'] == 0) pq.add(new Node(0, '\0'));
             else pq.add(new Node(0, '\1'));
         }
 
-        while (!pq.isEmpty()) {
-            Node node = pq.poll();
-            System.out.println(node.getWeight());
-//            Node left = pq.delMin();
-//            Node right = pq.delMin();
-//            Node parent = new Node(left, right);
-//            pq.insert(parent);
+        while (pq.size() > 1) {
+            Node left = pq.poll();
+            Node right = pq.poll();
+            Node parent = new Node(left, right);
+            pq.add(parent);
         }
 
-//        huffmanTree = pq.delMin();
+        huffmanTree = pq.poll();
 
-//        return huffmanTree;
-        System.out.println();
-        return null;
+        return huffmanTree;
     }
 
     /**
