@@ -15,9 +15,6 @@ public class A_Star extends DijkstraShortestPath {
         euclideanFrom = new double[graph.getNumberOfStations()];
 
         for (int i = 0; i < graph.getNumberOfStations(); i++) {
-            if (i == graph.getIndexOfStationByName(end)) {
-                continue;
-            }
             Station station = graph.getStation(i);
             Location location = station.getLocation();
             euclideanFrom[i] = location.travelTime(graph.getStation(endIndex).getLocation());
@@ -27,24 +24,21 @@ public class A_Star extends DijkstraShortestPath {
     public void relax(TransportGraph graph, int currentVertex) {
         Station station = graph.getStation(currentVertex);
         nodesVisited.add(station);
+
         for (Connection connection : graph.getAdjacentConnections(station)) {
             int nextVertex = graph.getIndexOfStationByName(connection.getTo().getStationName());
 
-            if (nodesVisited.contains(connection.getTo())) {
-                continue;
-            }
+            double travelCost = distTo[currentVertex] + connection.getWeight() + getTransferPenalty(currentVertex, nextVertex);
 
-            double totalTravelCost = distTo[currentVertex] + connection.getWeight() + getTransferPenalty(currentVertex, nextVertex) + euclideanFrom[nextVertex];
-
-            if (distTo[nextVertex] > totalTravelCost) {
-                distTo[nextVertex] = totalTravelCost;
+            if (distTo[nextVertex] > travelCost) {
+                distTo[nextVertex] = travelCost;
                 edgeTo[nextVertex] = currentVertex;
                 edgeToType[nextVertex] = connection.getLine();
 
                 if (pq.contains(nextVertex)) {
-                    pq.decreaseKey(nextVertex, distTo[nextVertex]);
+                    pq.decreaseKey(nextVertex, distTo[nextVertex] + euclideanFrom[nextVertex]);
                 } else {
-                    pq.insert(nextVertex, distTo[nextVertex]);
+                    pq.insert(nextVertex, distTo[nextVertex] + euclideanFrom[nextVertex]);
                 }
             }
         }

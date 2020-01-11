@@ -2,28 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="795b1806-9481-454c-868e-6ebab274346e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/inleveren.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/controller/TransportGraphLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/controller/TransportGraphLauncher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/graphalgorithms/A_Star.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/graphalgorithms/A_Star.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/graphalgorithms/AbstractPathSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/graphalgorithms/AbstractPathSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/graphalgorithms/DijkstraShortestPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/graphalgorithms/DijkstraShortestPath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/model/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/main/java/model/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/test/test/A_StarTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/test/java/test/A_StarTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/test/test/BreadthFirstPathTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/test/java/test/BreadthFirstPathTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/test/test/DepthFirstPathTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/test/java/test/DepthFirstPathTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/test/test/DijkstraShortestPathTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/test/java/test/DijkstraShortestPathTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/test/test/LocationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/test/java/test/LocationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PublicTransportMap/src/test/test/TransportGraphTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PublicTransportMap/src/test/java/test/TransportGraphTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/SandS.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/princeton/cs/algs4/Huffman.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/nl/hva/ict/se/sands/BackwardsSearch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/nl/hva/ict/se/sands/HuffmanCompression.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/nl/hva/ict/se/sands/Node.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/nl/hva/ict/se/sands/BackwardsSearchTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/nl/hva/ict/se/sands/HuffmanCompressionTest.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +54,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1578690287083</updated>
-      <workItem from="1578690288455" duration="629000" />
+      <workItem from="1578690288455" duration="668000" />
     </task>
     <servers />
   </component>

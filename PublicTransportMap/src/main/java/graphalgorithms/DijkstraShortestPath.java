@@ -7,7 +7,6 @@ public class DijkstraShortestPath extends AbstractPathSearch {
     protected final double[] distTo;
     protected final IndexMinPQ<Double> pq;
 
-
     public DijkstraShortestPath(TransportGraph graph, String start, String end) {
         super(graph, start, end);
         pq = new IndexMinPQ<>(graph.getNumberOfStations());
@@ -20,21 +19,12 @@ public class DijkstraShortestPath extends AbstractPathSearch {
         pq.insert(startIndex, 0.0);
     }
 
-    /**
-     * 9.2
-     * 15.3
-     */
-
     public void relax(TransportGraph graph, int currentVertex) {
         Station station = graph.getStation(currentVertex);
         nodesVisited.add(station);
 
         for (Connection connection : graph.getAdjacentConnections(station)) {
             int nextVertex = graph.getIndexOfStationByName(connection.getTo().getStationName());
-
-            if (nodesVisited.contains(connection.getTo())) {
-                continue;
-            }
 
             double totalTravelCost = distTo[currentVertex] + connection.getWeight() + getTransferPenalty(currentVertex, nextVertex);
 

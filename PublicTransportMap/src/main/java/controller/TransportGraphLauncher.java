@@ -53,8 +53,8 @@ public class TransportGraphLauncher {
         dfpTest.printNodesInVisitedOrder();
         System.out.println();
 
-        System.out.println("## Overview DFS");
-        printOverview(dfpTest, linesA, transportGraphA);
+//        System.out.println("## Overview DFS");
+//        printOverview(dfpTest, linesA, transportGraphA);
 
 
         System.out.println("## BFS ##");
@@ -64,15 +64,15 @@ public class TransportGraphLauncher {
         bfsTest.printNodesInVisitedOrder();
         System.out.println();
 
-        System.out.println("## Overview BFS");
-        printOverview(dfpTest, linesA, transportGraphA);
+//        System.out.println("## Overview BFS");
+//        printOverview(dfpTest, linesA, transportGraphA);
 
         // Assignment B
         String[] redLineB = {"red", "metro", "Haven", "Marken", "Steigerplein", "Centrum", "Meridiaan", "Dukdalf", "Oostvaarders"};
         String[] blueLineB = {"blue", "metro", "Trojelaan", "Coltrane Cirkel", "Meridiaan", "Robijnpark", "Violetplantsoen"};
         String[] purpleLineB = {"purple", "metro", "Grote Sluis", "Grootzeil", "Coltrane Cirkel", "Centrum", "Swingstraat"};
         String[] greenLineB = {"green", "metro", "Ymeerdijk", "Trojelaan", "Steigerplein", "Swingstraat", "Bachgracht", "Nobelplein"};
-        String[] yellowLineB = {"yellow", "bus", "Grote sluis", "Ymeerdijk", "Haven", "Nobelplein", "Violetplantsoen", "Oostvaarders", "Grote sluis"};
+        String[] yellowLineB = {"yellow", "bus", "Grote Sluis", "Ymeerdijk", "Haven", "Nobelplein", "Violetplantsoen", "Oostvaarders"};
 
         List<String[]> linesB = new ArrayList<>();
         linesB.add(redLineB);
@@ -101,7 +101,7 @@ public class TransportGraphLauncher {
                 {9, 0}, {9, 3}, {10, 5}, {10, 9}, {11, 11}, {12, 13}
         };
         int[][] yellowCoordinates = {
-                {2, 3}, {9, 0}, {14, 1}, {12, 13}, {5, 14}, {0, 11}, {2, 3}
+                {2, 3}, {9, 0}, {14, 1}, {12, 13}, {5, 14}, {0, 11}
         };
 
         TransportGraph transportGraphB = new TransportGraph.Builder()
@@ -139,27 +139,29 @@ public class TransportGraphLauncher {
         bfsTestB.printNodesInVisitedOrder();
         System.out.println();
 
+        String from = "Haven";
+        String to = "Oostvaarders";
         //Dijkstra
-        DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(transportGraphB, "Haven", "Nobelplein");
+        DijkstraShortestPath dijkstraShortestPath = new DijkstraShortestPath(transportGraphB, from, to);
         dijkstraShortestPath.search();
         System.out.println(dijkstraShortestPath);
         dijkstraShortestPath.printNodesInVisitedOrder();
         System.out.println(dijkstraShortestPath.getTotalWeight());
         System.out.println();
 
-        System.out.println("## Overview Dijkstra");
-        printOverview(dijkstraShortestPath, linesB, transportGraphB);
-        System.out.println();
+//        System.out.println("## Overview Dijkstra");
+//        printOverview(dijkstraShortestPath, linesB, transportGraphB);
+//        System.out.println();
 
-        A_Star aStar = new A_Star(transportGraphB, "Haven", "Nobelplein");
+        A_Star aStar = new A_Star(transportGraphB, from, to);
         aStar.search();
         System.out.println(aStar);
         aStar.printNodesInVisitedOrder();
         System.out.println(aStar.getTotalWeight());
         System.out.println();
 
-        System.out.println("## Overview A_star");
-        printOverview(aStar, linesB, transportGraphB);
+//        System.out.println("## Overview A_star");
+//        printOverview(aStar, linesB, transportGraphB);
     }
 
     private static void printOverview(AbstractPathSearch abstractPathSearch, List<String[]> listOfLines, TransportGraph transportGraph){

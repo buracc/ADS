@@ -17,14 +17,11 @@ public class DepthFirstPath extends AbstractPathSearch {
 
     private void recursiveSearch(int vertex) {
         marked[vertex] = true;
-        for (int w : graph.getAdjacentVertices(vertex)){
-            if (!marked[w]){
+        for (int w : graph.getAdjacentVertices(vertex)) {
+            if (!marked[w]) {
                 nodesVisited.add(graph.getStation(w));
                 edgeTo[w] = vertex;
                 marked[w] = true;
-                if (w == endIndex){
-                    break;
-                }
                 recursiveSearch(w);
             }
         }
